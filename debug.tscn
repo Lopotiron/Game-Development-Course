@@ -1,0 +1,87 @@
+[gd_scene load_steps=15 format=3 uid="uid://bjhyqe86rj5sn"]
+
+[ext_resource type="Texture2D" uid="uid://cmfe8tihibfw3" path="res://textures/slate/Slate_basecolor.png" id="1_jwave"]
+[ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="2_pk40j"]
+[ext_resource type="Texture2D" uid="uid://dtvmiv5vgl6k5" path="res://textures/slate/Slate_height.png" id="3_6xqm2"]
+[ext_resource type="PackedScene" uid="uid://b1uypert1tm72" path="res://player.tscn" id="3_obyai"]
+[ext_resource type="PackedScene" uid="uid://vqmd51jh18hb" path="res://obstacle.tscn" id="4_e0a3d"]
+[ext_resource type="Texture2D" uid="uid://dnw7hwrwtp0m7" path="res://textures/slate/Slate_metallic.png" id="4_soqm1"]
+[ext_resource type="Texture2D" uid="uid://bawbo12auqhby" path="res://textures/slate/Slate_normal.png" id="5_n11w8"]
+[ext_resource type="Texture2D" uid="uid://c7xrqxgmfof2t" path="res://textures/slate/Slate_roughness.png" id="6_1oi5i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txpwr"]
+sky_top_color = Color(0.21127725, 0.35444102, 1, 1)
+sky_horizon_color = Color(0.11396689, 0.75911677, 0.63788205, 1)
+
+[sub_resource type="Sky" id="Sky_16g7q"]
+sky_material = SubResource("ProceduralSkyMaterial_txpwr")
+
+[sub_resource type="Environment" id="Environment_txpwr"]
+background_mode = 2
+sky = SubResource("Sky_16g7q")
+ambient_light_color = Color(1.347661e-06, 0.8653767, 0.9412623, 1)
+ssr_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwtpl"]
+albedo_texture = ExtResource("1_jwave")
+metallic = 1.0
+metallic_texture = ExtResource("4_soqm1")
+roughness_texture = ExtResource("6_1oi5i")
+normal_enabled = true
+normal_texture = ExtResource("5_n11w8")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_pk40j")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("3_6xqm2")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lvjdj"]
+material = SubResource("StandardMaterial3D_qwtpl")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykrsh"]
+size = Vector3(50, 1, 50)
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_txpwr")
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5054066, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22351074, 0.76506305, -0.10609436)
+mesh = SubResource("PlaneMesh_lvjdj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2583058, 0)
+shape = SubResource("BoxShape3D_ykrsh")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="floor"]
+transform = Transform3D(-0.034602076, 0.7768872, -0.62868834, -0.018325496, 0.62846607, 0.77762115, 0.99923325, 0.038428336, -0.0075093885, 0, 6.6857243, 0)
+light_energy = 1.33
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_obyai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54738, 0)
+
+[node name="parkour" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0158386, 1.6422586, 0.77108)
+
+[node name="Object" parent="parkour" instance=ExtResource("4_e0a3d")]
+
+[node name="Object2" parent="parkour" instance=ExtResource("4_e0a3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5183277, 0.46238852, 0.7337129)
+
+[node name="Object3" parent="parkour" instance=ExtResource("4_e0a3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5247374, 0.1897831, 0.73339343)
+
+[node name="Object4" parent="parkour" instance=ExtResource("4_e0a3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2453241, 0.9689679, -0.77108)

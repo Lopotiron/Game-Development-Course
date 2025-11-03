@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1uypert1tm72"]
+
+[ext_resource type="Script" uid="uid://b36rhuq3tdud2" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://clyu607f0l757" path="res://models/kn0_w3r.glb" id="2_hqtel"]
+[ext_resource type="Script" uid="uid://cw17b203pgb3q" path="res://camera_3d.gd" id="3_i3pqv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
+
+[node name="FAB converted" parent="." instance=ExtResource("2_hqtel")]
+transform = Transform3D(-0.4, 0, -3.4969112e-08, 0, 0.4, 0, 3.4969112e-08, 0, -0.4, 0, 0, -0.78678536)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4flbx")
+debug_color = Color(0.99607843, 0, 0, 0.41960785)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9823363, 0.18712415, 0, -0.18712415, 0.9823363, 0, 0.6754397, 0)
+spring_length = 4.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.995104, -0.098833576, 0, 0.098833576, 0.995104, 0, 0.019509971, 3.9683058)
+fov = 70.0
+script = ExtResource("3_i3pqv")
