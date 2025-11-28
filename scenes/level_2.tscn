@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu6onfp7slebf"]
+
+[ext_resource type="PackedScene" uid="uid://dgdn7vruhfm6n" path="res://scenes/level_2_rectangle_obstacle.tscn" id="1_3bmlt"]
+[ext_resource type="PackedScene" uid="uid://qsun3lxv7kr3" path="res://scenes/level_2_rampe_obstacle.tscn" id="2_jm1iu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jm1iu"]
+size = Vector2(20, 20)
+
+[node name="Level 2" type="Node3D"]
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Level2_rectangle_obstacle11" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.93356824, 7.288528, -0.45297706)
+
+[node name="Level2_rectangle_obstacle10" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.235765, 6.9313707, -2.8827748)
+
+[node name="Level2_rectangle_obstacle9" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.1249986, 6.73191, -2.6030602)
+
+[node name="Level2_rectangle_obstacle6" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2488852, 3.801062, -1.8336806)
+
+[node name="Level2_rectangle_obstacle4" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4864273, 2.090134, 5.6693716)
+
+[node name="Level2_rectangle_obstacle" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+
+[node name="Level2_rectangle_obstacle2" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.536748, 0.7797065, -0.13873982)
+
+[node name="Level2_rectangle_obstacle3" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6022096, 1.5188905, 4.8145957)
+
+[node name="Level2_rectangle_obstacle5" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.775597, 2.6265779, 1.0646901)
+
+[node name="Level2_rectangle_obstacle7" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7148018, 4.765691, 2.4333887)
+
+[node name="Level2_rectangle_obstacle8" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4015634, 5.6317625, 2.1156754)
+
+[node name="Level2_rectangle_obstacle" parent="Obstacles/Level2_rectangle_obstacle8" instance=ExtResource("2_jm1iu")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -2.9812315, 0.49681282, 0)
+
+[node name="Level2_rectangle_obstacle13" parent="Obstacles" instance=ExtResource("2_jm1iu")]
+transform = Transform3D(-0.11471243, 0, 0.1638324, 0, 0.5, 0, -0.1638324, 0, -0.11471243, 2.719696, 7.463803, 1.292011)
+
+[node name="Level2_rectangle_obstacle14" parent="Obstacles" instance=ExtResource("2_jm1iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1278214, 8.163902, 3.6270294)
+
+[node name="Level2_rectangle_obstacle15" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105321646, 8.1633215, 3.6198285)
+
+[node name="Level2_rectangle_obstacle16" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.673573, 8.870752, 5.0104012)
+
+[node name="Level2_rectangle_obstacle17" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, -4.3789625, 9.432148, 0.016184509)
+
+[node name="Level2_rectangle_obstacle18" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(1.8374722, 0, 0.19743606, 0, 1, 0, -0.78974426, 0, 0.45936805, -3.7904494, 10.017183, -4.093446)
+
+[node name="Level2_rectangle_obstacle19" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(0.67600185, 0, -0.36844996, 0, 1, 0, 0.7368999, 0, 0.33800092, 1.7686393, 10.588245, -1.4946662)
+
+[node name="Level2_rectangle_obstacle21" parent="Obstacles" instance=ExtResource("1_3bmlt")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -2.4485059, 11.206425, 5.1875567)
+
+[node name="Level2_rectangle_obstacle20" parent="Obstacles" instance=ExtResource("2_jm1iu")]
+transform = Transform3D(0.5533043, 0, 0.4164896, 0, 1, 0, -0.8329792, 0, 0.27665216, 1.0055336, 11.224212, 2.1192417)
+
+[node name="Level2_rectangle_obstacle12" parent="Obstacles" instance=ExtResource("2_jm1iu")]
+transform = Transform3D(-0.1713489, 0, -0.1031482, 0, 0.5, 0, 0.1031482, 0, -0.1713489, 1.1762071, 7.5628796, -0.52763265)
+
+[node name="floor" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_jm1iu")
