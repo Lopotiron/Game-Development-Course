@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjhyqe86rj5sn"]
+[gd_scene load_steps=18 format=3 uid="uid://bjhyqe86rj5sn"]
 
 [ext_resource type="PackedScene" uid="uid://72st88be6r2b" path="res://scenes/hud.tscn" id="1_o7ao6"]
+[ext_resource type="PackedScene" uid="uid://cysf0c7h3vscm" path="res://scenes/pause_menu.tscn" id="2_05sef"]
 [ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/clock.tscn" id="2_naxnx"]
 [ext_resource type="Texture2D" uid="uid://cmfe8tihibfw3" path="res://textures/slate/Slate_basecolor.png" id="3_05sef"]
 [ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="4_vf3rk"]
@@ -52,6 +53,8 @@ size = Vector3(50, 1, 50)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("1_o7ao6")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_05sef")]
 
 [node name="Clock" parent="." instance=ExtResource("2_naxnx")]
 
