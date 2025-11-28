@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://bvqjt31xvibhn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j8ug"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(1, 0, 0, 0.14901961)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2x682"]
+material = SubResource("StandardMaterial3D_7j8ug")
+top_radius = 25.0
+bottom_radius = 25.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2x682"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 1, 0, 0.14901961)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ay4al"]
+material = SubResource("StandardMaterial3D_2x682")
+top_radius = 25.0
+bottom_radius = 25.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktxwe"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0, 0, 1, 0.14901961)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qrbg1"]
+material = SubResource("StandardMaterial3D_ktxwe")
+top_radius = 25.0
+bottom_radius = 25.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfguu"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.49803922, 0.49803922, 0.49803922, 0.14901961)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_85u2j"]
+material = SubResource("StandardMaterial3D_jfguu")
+top_radius = 25.0
+bottom_radius = 25.0
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl0gn"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vqps3"]
+material = SubResource("StandardMaterial3D_xl0gn")
+top_radius = 25.0
+bottom_radius = 25.0
+height = 0.05
+
+[node name="tower" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+use_collision = true
+
+[node name="outer cylinder" type="CSGCylinder3D" parent="CSGCombiner3D"]
+radius = 25.0
+height = 60.0
+sides = 64
+
+[node name="inner cylinder" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023659468, 2.3841858e-07, -0.0032089949)
+operation = 2
+radius = 24.5
+height = 60.0
+sides = 64
+
+[node name="Floors" type="Node3D" parent="."]
+
+[node name="FloorLimit" type="MeshInstance3D" parent="Floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+mesh = SubResource("CylinderMesh_2x682")
+skeleton = NodePath("../..")
+
+[node name="FloorLimit2" type="MeshInstance3D" parent="Floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1525574e-06, 24.009754, 0.010084152)
+mesh = SubResource("CylinderMesh_ay4al")
+skeleton = NodePath("../..")
+
+[node name="FloorLimit3" type="MeshInstance3D" parent="Floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
+mesh = SubResource("CylinderMesh_qrbg1")
+skeleton = NodePath("../..")
+
+[node name="FloorLimit4" type="MeshInstance3D" parent="Floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48, 0)
+mesh = SubResource("CylinderMesh_85u2j")
+skeleton = NodePath("../..")
+
+[node name="FloorLimit5" type="MeshInstance3D" parent="Floors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60, 0)
+mesh = SubResource("CylinderMesh_vqps3")
+skeleton = NodePath("../..")
