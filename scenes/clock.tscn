@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsb7uucw328e7"]
+
+[ext_resource type="Script" uid="uid://c6jepig0syctp" path="res://scripts/clock.gd" id="1_vlc7k"]
+
+[node name="Clock" type="Node" groups=["clockGroup"]]
+script = ExtResource("1_vlc7k")

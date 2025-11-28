@@ -6,7 +6,7 @@ func _ready():
 	%SettingsContainer.hide()
 
 func play():
-	get_tree().change_scene_to_file("res://debug.tscn")
+	get_tree().change_scene_to_file("res://scenes/debug.tscn")
 
 func quit_game():
 	get_tree().quit()
