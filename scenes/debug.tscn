@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://72st88be6r2b" path="res://scenes/hud.tscn" id="1_o7ao6"]
 [ext_resource type="PackedScene" uid="uid://cysf0c7h3vscm" path="res://scenes/pause_menu.tscn" id="2_05sef"]
 [ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/clock.tscn" id="2_naxnx"]
-[ext_resource type="Texture2D" uid="uid://cmfe8tihibfw3" path="res://textures/slate/Slate_basecolor.png" id="3_05sef"]
+[ext_resource type="Texture2D" uid="uid://bxdod8gt2yr0a" path="res://textures/bricks/pavement_04_disp_4k.jpg" id="4_05sef"]
 [ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="4_vf3rk"]
 [ext_resource type="Texture2D" uid="uid://dtvmiv5vgl6k5" path="res://textures/slate/Slate_height.png" id="5_oydge"]
 [ext_resource type="Texture2D" uid="uid://dnw7hwrwtp0m7" path="res://textures/slate/Slate_metallic.png" id="6_pleq2"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xrqxgmfof2t" path="res://textures/slate/Slate_roughness.png" id="8_wg4p5"]
 [ext_resource type="PackedScene" uid="uid://b1uypert1tm72" path="res://scenes/player.tscn" id="9_i54yb"]
 [ext_resource type="PackedScene" uid="uid://bvqjt31xvibhn" path="res://scenes/tower.tscn" id="12_05sef"]
-[ext_resource type="PackedScene" path="res://scenes/level_2.tscn" id="13_vf3rk"]
+[ext_resource type="PackedScene" uid="uid://cu6onfp7slebf" path="res://scenes/level_2.tscn" id="13_vf3rk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txpwr"]
 sky_top_color = Color(0.21127725, 0.35444102, 1, 1)
@@ -29,7 +29,7 @@ sdfgi_enabled = true
 sdfgi_use_occlusion = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwtpl"]
-albedo_texture = ExtResource("3_05sef")
+albedo_texture = ExtResource("4_05sef")
 metallic = 1.0
 metallic_texture = ExtResource("6_pleq2")
 roughness_texture = ExtResource("8_wg4p5")
@@ -75,11 +75,6 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2583058, 0)
 shape = SubResource("BoxShape3D_ykrsh")
 debug_color = Color(1, 0, 0, 0.41960785)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="floor"]
-transform = Transform3D(-0.034602076, 0.7768872, -0.62868834, -0.018325496, 0.62846607, 0.77762115, 0.99923325, 0.038428336, -0.0075093885, 0, 6.6857243, 0)
-light_energy = 1.33
-metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("9_i54yb")]
 transform = Transform3D(-0.010471792, 0, 0.99994516, 0, 1, 0, -0.99994516, 0, -0.010471792, 9, 2.5, 4.8)

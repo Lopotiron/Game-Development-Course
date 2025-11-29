@@ -1,4 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvqjt31xvibhn"]
+[gd_scene load_steps=19 format=3 uid="uid://bvqjt31xvibhn"]
+
+[ext_resource type="Texture2D" uid="uid://ddgj2bxmgw6a6" path="res://textures/bricks/tower.png" id="1_ay4al"]
+[ext_resource type="Texture2D" uid="uid://bxdod8gt2yr0a" path="res://textures/bricks/pavement_04_disp_4k.jpg" id="2_ay4al"]
+[ext_resource type="Texture2D" uid="uid://ch0g50t0uugmn" path="res://flame.png" id="3_ktxwe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ay4al"]
+cull_mode = 2
+albedo_texture = ExtResource("1_ay4al")
+uv1_scale = Vector3(2, -1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrbg1"]
+albedo_texture = ExtResource("1_ay4al")
+uv1_scale = Vector3(2, -1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j8ug"]
 transparency = 1
@@ -45,12 +58,30 @@ bottom_radius = 25.0
 height = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl0gn"]
+albedo_texture = ExtResource("2_ay4al")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vqps3"]
 material = SubResource("StandardMaterial3D_xl0gn")
 top_radius = 25.0
 bottom_radius = 25.0
 height = 0.05
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_85u2j"]
+direction = Vector3(0, 1, 0)
+spread = 0.6
+initial_velocity_min = 0.5
+initial_velocity_max = 1.1999999
+gravity = Vector3(0, 0, 0)
+color = Color(1, 0.88235295, 0.47843137, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqps3"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_ktxwe")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_qfw7u"]
+material = SubResource("StandardMaterial3D_vqps3")
 
 [node name="tower" type="Node3D"]
 
@@ -62,13 +93,14 @@ use_collision = true
 radius = 25.0
 height = 60.0
 sides = 64
+material = SubResource("StandardMaterial3D_ay4al")
 
 [node name="inner cylinder" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023659468, 2.3841858e-07, -0.0032089949)
 operation = 2
 radius = 24.5
 height = 60.0
 sides = 64
+material = SubResource("StandardMaterial3D_qrbg1")
 
 [node name="Floors" type="Node3D" parent="."]
 
@@ -78,7 +110,7 @@ mesh = SubResource("CylinderMesh_2x682")
 skeleton = NodePath("../..")
 
 [node name="FloorLimit2" type="MeshInstance3D" parent="Floors"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1525574e-06, 24.009754, 0.010084152)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24, 0)
 mesh = SubResource("CylinderMesh_ay4al")
 skeleton = NodePath("../..")
 
@@ -96,3 +128,320 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60, 0)
 mesh = SubResource("CylinderMesh_vqps3")
 skeleton = NodePath("../..")
+
+[node name="Torches" type="Node3D" parent="."]
+
+[node name="TorchFloor" type="Node3D" parent="Torches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="Torch" type="OmniLight3D" parent="Torches/TorchFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor/Torch"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch2" type="OmniLight3D" parent="Torches/TorchFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor/Torch2"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch3" type="OmniLight3D" parent="Torches/TorchFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor/Torch3"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch4" type="OmniLight3D" parent="Torches/TorchFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor/Torch4"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="TorchFloor2" type="Node3D" parent="Torches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
+
+[node name="Torch" type="OmniLight3D" parent="Torches/TorchFloor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor2/Torch"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch2" type="OmniLight3D" parent="Torches/TorchFloor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor2/Torch2"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch3" type="OmniLight3D" parent="Torches/TorchFloor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor2/Torch3"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch4" type="OmniLight3D" parent="Torches/TorchFloor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor2/Torch4"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="TorchFloor3" type="Node3D" parent="Torches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+
+[node name="Torch" type="OmniLight3D" parent="Torches/TorchFloor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor3/Torch"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch2" type="OmniLight3D" parent="Torches/TorchFloor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor3/Torch2"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch3" type="OmniLight3D" parent="Torches/TorchFloor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor3/Torch3"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch4" type="OmniLight3D" parent="Torches/TorchFloor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor3/Torch4"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="TorchFloor4" type="Node3D" parent="Torches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42, 0)
+
+[node name="Torch" type="OmniLight3D" parent="Torches/TorchFloor4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor4/Torch"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch2" type="OmniLight3D" parent="Torches/TorchFloor4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor4/Torch2"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch3" type="OmniLight3D" parent="Torches/TorchFloor4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor4/Torch3"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch4" type="OmniLight3D" parent="Torches/TorchFloor4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor4/Torch4"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="TorchFloor5" type="Node3D" parent="Torches"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 54, 0)
+
+[node name="Torch" type="OmniLight3D" parent="Torches/TorchFloor5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor5/Torch"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch2" type="OmniLight3D" parent="Torches/TorchFloor5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor5/Torch2"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch3" type="OmniLight3D" parent="Torches/TorchFloor5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor5/Torch3"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
+
+[node name="Torch4" type="OmniLight3D" parent="Torches/TorchFloor5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 0)
+light_color = Color(1, 0.7058824, 0.36862746, 1)
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Torches/TorchFloor5/Torch4"]
+visible = false
+cast_shadow = 0
+amount = 3
+lifetime = 0.3
+preprocess = 0.3
+process_material = SubResource("ParticleProcessMaterial_85u2j")
+draw_pass_1 = SubResource("QuadMesh_qfw7u")
