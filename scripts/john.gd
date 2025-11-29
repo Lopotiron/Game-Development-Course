@@ -26,3 +26,15 @@ func jumpend(next_state: String = "Idle") -> void:
 	await get_tree().create_timer(dur).timeout
 	get_parent().is_landing = false
 	state_machine.travel(next_state)
+
+func punch_the_air():
+	state_machine.travel("Punch")
+
+	var dur: float = 0.25
+	if anim_player and anim_player.has_animation("AnimPack/Punch_Cross"):
+		dur = anim_player.get_animation("AnimPack/Punch_Cross").length
+	await get_tree().create_timer(dur).timeout
+	get_parent().is_punching = false
+	
+func walking():
+	state_machine.travel("Walk")

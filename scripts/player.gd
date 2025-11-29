@@ -16,6 +16,7 @@ var _gravity := -30.0
 var was_on_floor := true
 var is_jumping := false
 var is_landing := false
+var is_punching := false
 var in_air := false
 var should_stun := false
 var y_at_start_falling := 0.0
@@ -28,7 +29,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click"):
+	if event.is_action_pressed("right_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("show_mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -95,9 +96,21 @@ func _physics_process(delta: float) -> void:
 
 	was_on_floor = is_on_floor()
 
-	if not is_jumping and not is_landing and is_on_floor():
+	var punch_air := Input.is_action_just_pressed("left_click") and is_on_floor() and not should_stun and not is_punching
+	if punch_air:
+		is_punching = true
+		_skin.punch_the_air()
+	
+	if not is_jumping and not is_landing and is_on_floor() and not is_punching:
 		should_stun = false
-		if direction.length() > 0.2:
+
+		var horizontal_velocity := velocity
+		horizontal_velocity.y = 0
+		var ground_speed := horizontal_velocity.length()
+		
+		if ground_speed > 5.0:
 			_skin.sprint()
+		elif ground_speed > 0.1:
+			_skin.walking()
 		else:
 			_skin.idle()

@@ -1,7 +1,7 @@
-[gd_scene load_steps=67 format=3 uid="uid://b1uypert1tm72"]
+[gd_scene load_steps=75 format=3 uid="uid://b1uypert1tm72"]
 
 [ext_resource type="Script" uid="uid://b36rhuq3tdud2" path="res://scripts/player.gd" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://cpf6uopnlpm6w" path="res://animations/john.gd" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://cpf6uopnlpm6w" path="res://scripts/john.gd" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://b3qmdq46a2b5x" path="res://animations/AnimationLibrary_Godot_Standard.glb" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
@@ -17338,19 +17338,17 @@ animation = &"AnimPack/Jump_Land"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tuyoq"]
 animation = &"AnimPack/Jump_Start"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjrip"]
+animation = &"AnimPack/Punch_Cross"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dqkch"]
 animation = &"AnimPack/Sprint"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qlg0r"]
-xfade_time = 0.1
-advance_mode = 0
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_smehm"]
+animation = &"AnimPack/Walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_smehm"]
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ur7pv"]
-xfade_time = 0.1
-advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fjrip"]
 advance_mode = 0
@@ -17365,6 +17363,34 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tuyoq"]
 advance_mode = 0
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d2wvv"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v2ag"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qhqgy"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dqkch"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ur7pv"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jej6c"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oprun"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a8ls1"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y4r1p"]
 states/End/position = Vector2(1034, 61)
 states/Fall/node = SubResource("AnimationNodeAnimation_qhqgy")
@@ -17375,13 +17401,17 @@ states/Jump_end/node = SubResource("AnimationNodeAnimation_qlg0r")
 states/Jump_end/position = Vector2(802, 103)
 states/Jump_start/node = SubResource("AnimationNodeAnimation_tuyoq")
 states/Jump_start/position = Vector2(604, 31)
+states/Punch/node = SubResource("AnimationNodeAnimation_fjrip")
+states/Punch/position = Vector2(439, 216)
 states/Sprint/node = SubResource("AnimationNodeAnimation_dqkch")
 states/Sprint/position = Vector2(583, 178)
-transitions = ["Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_qlg0r"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_smehm"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_ur7pv"), "Idle", "Jump_start", SubResource("AnimationNodeStateMachineTransition_fjrip"), "Jump_start", "Fall", SubResource("AnimationNodeStateMachineTransition_y4r1p"), "Sprint", "Jump_start", SubResource("AnimationNodeStateMachineTransition_f1ej7"), "Fall", "Jump_end", SubResource("AnimationNodeStateMachineTransition_tuyoq")]
-graph_offset = Vector2(-6, -56)
+states/Walk/node = SubResource("AnimationNodeAnimation_smehm")
+states/Walk/position = Vector2(284, 201)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_smehm"), "Idle", "Jump_start", SubResource("AnimationNodeStateMachineTransition_fjrip"), "Jump_start", "Fall", SubResource("AnimationNodeStateMachineTransition_y4r1p"), "Sprint", "Jump_start", SubResource("AnimationNodeStateMachineTransition_f1ej7"), "Fall", "Jump_end", SubResource("AnimationNodeStateMachineTransition_tuyoq"), "Idle", "Punch", SubResource("AnimationNodeStateMachineTransition_d2wvv"), "Punch", "Idle", SubResource("AnimationNodeStateMachineTransition_3v2ag"), "Punch", "Sprint", SubResource("AnimationNodeStateMachineTransition_qhqgy"), "Sprint", "Punch", SubResource("AnimationNodeStateMachineTransition_dqkch"), "Sprint", "Walk", SubResource("AnimationNodeStateMachineTransition_ur7pv"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jej6c"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_oprun"), "Walk", "Sprint", SubResource("AnimationNodeStateMachineTransition_a8ls1")]
+graph_offset = Vector2(-20, 37)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qlg0r"]
-graph_offset = Vector2(-107.57901, 47.83429)
+graph_offset = Vector2(-180.89001, 131.03116)
 nodes/output/position = Vector2(540, 100)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_y4r1p")
 nodes/StateMachine/position = Vector2(140, 100)
@@ -17405,7 +17435,6 @@ unique_name_in_owner = true
 libraries = {
 &"AnimPack": SubResource("AnimationLibrary_dqkch")
 }
-speed_scale = 1.5
 
 [node name="CameraPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
