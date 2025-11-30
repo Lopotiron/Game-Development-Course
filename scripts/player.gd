@@ -22,7 +22,12 @@ var fall_time: float = 0.0
 const FALL_THRESHOLD := 0.5
 var should_stun := false
 var y_at_start_falling := 0.0
-
+var fall_voice_sounds := [
+	preload("res://musics/fall_sounds/keyboard.ogg"),
+	preload("res://musics/fall_sounds/miss.ogg"),
+	preload("res://musics/fall_sounds/noob.ogg"),
+	preload("res://musics/fall_sounds/pickle.ogg"),
+]
 @onready var _camera: Camera3D = $%Camera3D
 @onready var _skin = %John
 @onready var _camera_pivot: Node3D = %CameraPivot
@@ -93,6 +98,8 @@ func _physics_process(delta: float) -> void:
 		in_air = true
 		fall_time += delta
 		if fall_time >= FALL_THRESHOLD:
+			var random_sound = fall_voice_sounds.pick_random()
+			$FallVoiceAudio.stream = random_sound
 			$FallVoiceAudio.play()
 			fall_time = -9999
 		is_jumping = false
