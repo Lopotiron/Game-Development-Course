@@ -1,10 +1,12 @@
-[gd_scene load_steps=77 format=3 uid="uid://b1uypert1tm72"]
+[gd_scene load_steps=78 format=3 uid="uid://b1uypert1tm72"]
 
 [ext_resource type="Script" uid="uid://b36rhuq3tdud2" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cpf6uopnlpm6w" path="res://scripts/john.gd" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://b3qmdq46a2b5x" path="res://animations/AnimationLibrary_Godot_Standard.glb" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://dp43b3jloqpsd" path="res://musics/jump.mp3" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://cl8c31wor7s1j" path="res://musics/wrong-answer-buzzer.mp3" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://cdwar6uv5wg16" path="res://musics/4.mp3" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://cnil3qvnhrubl" path="res://musics/Fall2.mp3" id="6_tuyoq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 height = 1.8444824
@@ -17413,7 +17415,6 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-20, 37)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qlg0r"]
-graph_offset = Vector2(-180.89001, 131.03116)
 nodes/output/position = Vector2(540, 100)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_y4r1p")
 nodes/StateMachine/position = Vector2(140, 100)
@@ -17456,9 +17457,16 @@ root_node = NodePath("%John")
 tree_root = SubResource("AnimationNodeBlendTree_qlg0r")
 anim_player = NodePath("../John/AnimationPlayer")
 
+[node name="FootstepAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tuyoq")
+volume_db = -15.0
+
 [node name="JumpAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dqkch")
 volume_db = -10.0
 
 [node name="FallVoiceAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_qlg0r")
+[node name="FallAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_tuyoq")
+volume_db = -5.0

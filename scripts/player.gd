@@ -27,6 +27,8 @@ var y_at_start_falling := 0.0
 @onready var _skin = %John
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _jump_audio = $JumpAudio
+@onready var _fall_audio = $FallAudio
+@onready var _footstep_audio = $FootstepAudio
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -100,8 +102,11 @@ func _physics_process(delta: float) -> void:
 		is_landing = true
 		if y_at_start_falling - position.y >= 4 and is_landing:
 			should_stun = true
+			_fall_audio.play()
 		_skin.jumpend("Idle" if direction.length() < 0.2 else "Sprint")
 
+	if is_on_floor_only() and !is_landing and !_footstep_audio.playing and (velocity.x <= -4 or velocity.x >= 4 or velocity.z <= -4 or velocity.z >= 4):
+		_footstep_audio.play()
 
 	was_on_floor = is_on_floor()
 
