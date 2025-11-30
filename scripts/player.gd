@@ -29,18 +29,18 @@ var fall_voice_sounds := [
 	preload("res://musics/fall_sounds/pickle.ogg"),
 ]
 @onready var _camera: Camera3D = $%Camera3D
-@onready var _skin = %John
+@onready var _skin = %fahad
 @onready var _camera_pivot: Node3D = %CameraPivot
 @onready var _jump_audio = $JumpAudio
 @onready var _fall_audio = $FallAudio
 @onready var _footstep_audio = $FootstepAudio
-@onready var _pistol = $John/Pistol
+@onready var _pistol = $fahad/Pistol
 
 var pistol_visible: bool = false
 var bullet = load("res://scenes/bullet.tscn")
-@onready var bullet_pos = $John/Pistol/Marker3D
+@onready var bullet_pos = $fahad/Pistol/Marker3D
 var explosion = preload("res://scenes/explosion.tscn")
-@onready var explosion_pos = $John/Pistol/ExplosionPos
+@onready var explosion_pos = $fahad/Pistol/ExplosionPos
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
