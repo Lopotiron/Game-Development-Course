@@ -1,13 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvqjt31xvibhn"]
+[gd_scene load_steps=18 format=3 uid="uid://bvqjt31xvibhn"]
 
 [ext_resource type="Texture2D" uid="uid://ddgj2bxmgw6a6" path="res://textures/bricks/tower.png" id="1_ay4al"]
 [ext_resource type="Texture2D" uid="uid://bxdod8gt2yr0a" path="res://textures/bricks/pavement_04_disp_4k.jpg" id="2_ay4al"]
 [ext_resource type="Texture2D" uid="uid://ch0g50t0uugmn" path="res://flame.png" id="3_ktxwe"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ay4al"]
-cull_mode = 2
-albedo_texture = ExtResource("1_ay4al")
-uv1_scale = Vector3(2, -1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrbg1"]
 albedo_texture = ExtResource("1_ay4al")
@@ -92,14 +87,15 @@ use_collision = true
 [node name="outer cylinder" type="CSGCylinder3D" parent="CSGCombiner3D"]
 radius = 25.0
 height = 60.0
-sides = 64
-material = SubResource("StandardMaterial3D_ay4al")
+sides = 32
+smooth_faces = false
 
 [node name="inner cylinder" type="CSGCylinder3D" parent="CSGCombiner3D"]
 operation = 2
 radius = 24.5
 height = 60.0
-sides = 64
+sides = 32
+smooth_faces = false
 material = SubResource("StandardMaterial3D_qrbg1")
 
 [node name="Floors" type="Node3D" parent="."]
