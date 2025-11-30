@@ -13,6 +13,7 @@ func sprint():
 func jumpstart():
 	state_machine.travel("Jump_start")
 	
+
 func fall():
 	state_machine.travel("Fall")
 

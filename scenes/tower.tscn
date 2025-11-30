@@ -18,6 +18,7 @@ material = SubResource("StandardMaterial3D_7j8ug")
 top_radius = 25.0
 bottom_radius = 25.0
 height = 0.05
+cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2x682"]
 transparency = 1
@@ -29,6 +30,7 @@ material = SubResource("StandardMaterial3D_2x682")
 top_radius = 25.0
 bottom_radius = 25.0
 height = 0.05
+cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktxwe"]
 transparency = 1
@@ -40,6 +42,7 @@ material = SubResource("StandardMaterial3D_ktxwe")
 top_radius = 25.0
 bottom_radius = 25.0
 height = 0.05
+cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfguu"]
 transparency = 1
@@ -51,8 +54,10 @@ material = SubResource("StandardMaterial3D_jfguu")
 top_radius = 25.0
 bottom_radius = 25.0
 height = 0.05
+cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl0gn"]
+cull_mode = 2
 albedo_texture = ExtResource("2_ay4al")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vqps3"]
@@ -79,6 +84,7 @@ billboard_mode = 1
 material = SubResource("StandardMaterial3D_vqps3")
 
 [node name="tower" type="Node3D"]
+transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)

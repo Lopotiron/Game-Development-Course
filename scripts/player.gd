@@ -18,6 +18,8 @@ var is_jumping := false
 var is_landing := false
 var is_punching := false
 var in_air := false
+var fall_time: float = 0.0
+const FALL_THRESHOLD := 0.5
 var should_stun := false
 var y_at_start_falling := 0.0
 
@@ -84,9 +86,14 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and velocity.y <= 0:
 		if not in_air:
 			y_at_start_falling = position.y
+			fall_time = 0.0
+			_skin.fall()
 		in_air = true
+		fall_time += delta
+		if fall_time >= FALL_THRESHOLD:
+			$FallVoiceAudio.play()
+			fall_time = -9999
 		is_jumping = false
-		_skin.fall()
 
 	if is_on_floor() and in_air:
 		in_air = false
