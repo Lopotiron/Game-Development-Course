@@ -159,5 +159,7 @@ func _physics_process(delta: float) -> void:
 			_skin.sprint()
 		elif ground_speed > 0.1:
 			_skin.walking()
-		else:
+		elif not pistol_visible:
 			_skin.idle()
+		else:
+			_skin.hold_weapon()
