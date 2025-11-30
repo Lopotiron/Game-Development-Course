@@ -34,15 +34,30 @@ var fall_voice_sounds := [
 @onready var _jump_audio = $JumpAudio
 @onready var _fall_audio = $FallAudio
 @onready var _footstep_audio = $FootstepAudio
+@onready var _pistol = $John/Pistol
+
+var pistol_visible: bool = false
+var bullet = load("res://scenes/bullet.tscn")
+@onready var bullet_pos = $John/Pistol/Marker3D
+var explosion = preload("res://scenes/explosion.tscn")
+@onready var explosion_pos = $John/Pistol/ExplosionPos
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_pistol.hide()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("show_mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Input.is_action_just_pressed("hold_weapon"):
+		if pistol_visible:
+			_pistol.hide()
+			pistol_visible = false
+		else:
+			_pistol.show()
+			pistol_visible = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -117,10 +132,21 @@ func _physics_process(delta: float) -> void:
 
 	was_on_floor = is_on_floor()
 
-	var punch_air := Input.is_action_just_pressed("left_click") and is_on_floor() and not should_stun and not is_punching
+	var punch_air := Input.is_action_just_pressed("left_click") and is_on_floor() and not should_stun and not is_punching and not pistol_visible
 	if punch_air:
 		is_punching = true
 		_skin.punch_the_air()
+		
+	var shoot := Input.is_action_just_pressed("left_click") and not should_stun and pistol_visible
+	if shoot:
+		var bullet_instance = bullet.instantiate()
+		bullet_instance.position = bullet_pos.global_position
+		bullet_instance.transform.basis = bullet_pos.global_basis
+		var explosion_instance = explosion.instantiate()
+		explosion_instance.position = explosion_pos.global_position
+		get_parent().add_child(bullet_instance)
+		get_parent().add_child(explosion_instance)
+		explosion_instance.explode()
 	
 	if not is_jumping and not is_landing and is_on_floor() and not is_punching:
 		should_stun = false

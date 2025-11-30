@@ -6,6 +6,9 @@ extends Node3D
 
 func idle():
 	state_machine.travel("Idle")
+
+func hold_weapon():
+	state_machine.travel("Pistol_Aim_Neutral")
 	
 func sprint():
 	state_machine.travel("Sprint")
