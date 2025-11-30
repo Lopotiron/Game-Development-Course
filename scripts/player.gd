@@ -156,6 +156,10 @@ func _physics_process(delta: float) -> void:
 		horizontal_velocity.y = 0
 		var ground_speed := horizontal_velocity.length()
 		
+		if not is_on_floor():
+			pistol_running = true
+			_pistol.hide()
+		
 		if ground_speed > 5.0:
 			_skin.sprint()
 			pistol_running = true
