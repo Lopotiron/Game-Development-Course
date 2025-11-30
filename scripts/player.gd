@@ -37,6 +37,7 @@ var fall_voice_sounds := [
 @onready var _pistol = $fahad/Pistol
 
 var pistol_visible: bool = false
+var pistol_running: bool = false
 var bullet = load("res://scenes/bullet.tscn")
 @onready var bullet_pos = $fahad/Pistol/Marker3D
 var explosion = preload("res://scenes/explosion.tscn")
@@ -136,8 +137,8 @@ func _physics_process(delta: float) -> void:
 	if punch_air:
 		is_punching = true
 		_skin.punch_the_air()
-		
-	var shoot := Input.is_action_just_pressed("left_click") and not should_stun and pistol_visible
+	
+	var shoot := Input.is_action_just_pressed("left_click") and not should_stun and pistol_visible and not pistol_running
 	if shoot:
 		var bullet_instance = bullet.instantiate()
 		bullet_instance.position = bullet_pos.global_position
@@ -157,9 +158,16 @@ func _physics_process(delta: float) -> void:
 		
 		if ground_speed > 5.0:
 			_skin.sprint()
+			pistol_running = true
+			_pistol.hide()
 		elif ground_speed > 0.1:
 			_skin.walking()
+			pistol_running = true
+			_pistol.hide()
 		elif not pistol_visible:
 			_skin.idle()
+			pistol_running = false
 		else:
 			_skin.hold_weapon()
+			_pistol.show()
+			pistol_running = false
