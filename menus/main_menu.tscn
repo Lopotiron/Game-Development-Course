@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7qcv7bganhtr"]
 
 [ext_resource type="Script" uid="uid://c7n105tw43omo" path="res://menus/scripts/main_menu.gd" id="1_ij7vn"]
-[ext_resource type="Texture2D" uid="uid://c6l2q4hxhxitv" path="res://menus/assets/images/background.jpeg" id="2_yjgyn"]
+[ext_resource type="Texture2D" uid="uid://dedjtrl317voe" path="res://menus/assets/images/background.jpg" id="2_rqbgu"]
 [ext_resource type="AudioStream" uid="uid://cdvuq8q4l43nc" path="res://menus/assets/music/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg" id="3_yjgyn"]
 [ext_resource type="AudioStream" uid="uid://bp8r1tfby1k46" path="res://musics/click-menu-button.mp3" id="4_rqbgu"]
 
@@ -24,7 +24,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_yjgyn")
+texture = ExtResource("2_rqbgu")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
