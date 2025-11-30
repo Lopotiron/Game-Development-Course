@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cysf0c7h3vscm"]
+[gd_scene load_steps=8 format=3 uid="uid://cysf0c7h3vscm"]
 
 [ext_resource type="Script" uid="uid://dkxvvrrlmncpk" path="res://scripts/pause_menu.gd" id="1_myx47"]
 [ext_resource type="Shader" uid="uid://cjf0lkthuxjgd" path="res://shaders/pause_menu.gdshader" id="2_kukqi"]
+[ext_resource type="AudioStream" uid="uid://bp8r1tfby1k46" path="res://musics/click-menu-button.mp3" id="3_kukqi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5d2l8"]
 shader = ExtResource("2_kukqi")
@@ -121,6 +122,10 @@ text = "Quit"
 libraries = {
 &"": SubResource("AnimationLibrary_1s2dm")
 }
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kukqi")
+volume_db = -10.0
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

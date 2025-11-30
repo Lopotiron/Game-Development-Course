@@ -24,6 +24,7 @@ var y_at_start_falling := 0.0
 @onready var _camera: Camera3D = $%Camera3D
 @onready var _skin = %John
 @onready var _camera_pivot: Node3D = %CameraPivot
+@onready var _jump_audio = $JumpAudio
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -69,6 +70,7 @@ func _physics_process(delta: float) -> void:
 		is_jumping = true
 		was_on_floor = false
 		_skin.jumpstart()
+		_jump_audio.play()
 
 	if not should_stun:
 		move_and_slide()

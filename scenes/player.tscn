@@ -1,8 +1,9 @@
-[gd_scene load_steps=75 format=3 uid="uid://b1uypert1tm72"]
+[gd_scene load_steps=76 format=3 uid="uid://b1uypert1tm72"]
 
 [ext_resource type="Script" uid="uid://b36rhuq3tdud2" path="res://scripts/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cpf6uopnlpm6w" path="res://scripts/john.gd" id="3_dqkch"]
 [ext_resource type="PackedScene" uid="uid://b3qmdq46a2b5x" path="res://animations/AnimationLibrary_Godot_Standard.glb" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://dp43b3jloqpsd" path="res://musics/jump.mp3" id="4_dqkch"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
 height = 1.8444824
@@ -17453,3 +17454,7 @@ unique_name_in_owner = true
 root_node = NodePath("%John")
 tree_root = SubResource("AnimationNodeBlendTree_qlg0r")
 anim_player = NodePath("../John/AnimationPlayer")
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dqkch")
+volume_db = -10.0

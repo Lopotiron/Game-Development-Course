@@ -1,6 +1,8 @@
 extends Control
 class_name PauseMenu
 
+@onready var button_sound = $ButtonClick
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
@@ -22,6 +24,7 @@ func pause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	visible = true
+
 func test_esc():
 	if Input.is_action_just_pressed("esc") and !get_tree().paused:
 		pause()
@@ -29,7 +32,9 @@ func test_esc():
 		resume()
 
 func _on_resume_pressed() -> void:
+	button_sound.play()
 	resume()
 
 func _on_quit_pressed() -> void:
+	button_sound.play()
 	get_tree().quit(0)

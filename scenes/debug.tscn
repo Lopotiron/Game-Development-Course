@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bjhyqe86rj5sn"]
+[gd_scene load_steps=20 format=3 uid="uid://bjhyqe86rj5sn"]
 
 [ext_resource type="PackedScene" uid="uid://72st88be6r2b" path="res://scenes/hud.tscn" id="1_o7ao6"]
 [ext_resource type="PackedScene" uid="uid://cysf0c7h3vscm" path="res://scenes/pause_menu.tscn" id="2_05sef"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xrqxgmfof2t" path="res://textures/slate/Slate_roughness.png" id="8_wg4p5"]
 [ext_resource type="PackedScene" uid="uid://b1uypert1tm72" path="res://scenes/player.tscn" id="9_i54yb"]
 [ext_resource type="PackedScene" uid="uid://bvqjt31xvibhn" path="res://scenes/tower.tscn" id="12_05sef"]
+[ext_resource type="AudioStream" uid="uid://dvee28nxlfpjg" path="res://musics/cave_sound.mp3" id="13_oydge"]
 [ext_resource type="PackedScene" uid="uid://cu6onfp7slebf" path="res://scenes/level_2.tscn" id="13_vf3rk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txpwr"]
@@ -82,3 +83,7 @@ transform = Transform3D(-0.010471792, 0, 0.99994516, 0, 1, 0, -0.99994516, 0, -0
 [node name="tower" parent="." instance=ExtResource("12_05sef")]
 
 [node name="Level 2" parent="." instance=ExtResource("13_vf3rk")]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_oydge")
+autoplay = true
