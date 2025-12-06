@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbc2i7c2lus7q"]
+
+[ext_resource type="Texture2D" uid="uid://bsbd3lubdf83m" path="res://textures/bossWalls/wallpaper_texture_seamless_14-4K/4K-walllpaper_14-diffuse.jpg" id="1_hrlwy"]
+[ext_resource type="Texture2D" uid="uid://cd0blv2mevfoq" path="res://textures/bossWalls/wallpaper_texture_seamless_14-4K/4K-walllpaper_14-ao.jpg" id="2_16wmg"]
+[ext_resource type="Texture2D" uid="uid://dmy8qlnafbnkw" path="res://textures/bossWalls/wallpaper_texture_seamless_14-4K/4K-walllpaper_14-normal.jpg" id="3_ui3e3"]
+[ext_resource type="Texture2D" uid="uid://c143s5t5dp8cr" path="res://textures/bossWalls/wallpaper_texture_seamless_14-4K/4K-walllpaper_14-specular.jpg" id="4_a1w7o"]
+[ext_resource type="Texture2D" uid="uid://bxagpq0vynpm8" path="res://textures/bossWalls/wallpaper_texture_seamless_14-4K/4K-walllpaper_14-displacement.jpg" id="5_1nmsn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tj76s"]
+size = Vector3(1.5, 0.007, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4mw0"]
+albedo_texture = ExtResource("1_hrlwy")
+metallic = 1.0
+metallic_texture = ExtResource("2_16wmg")
+roughness_texture = ExtResource("5_1nmsn")
+normal_enabled = true
+normal_texture = ExtResource("3_ui3e3")
+refraction_enabled = true
+refraction_texture = ExtResource("4_a1w7o")
+uv1_scale = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_q4kmf"]
+material = SubResource("StandardMaterial3D_n4mw0")
+size = Vector2(1.5, 1)
+
+[node name="BossWalls" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.0006227493, 0)
+shape = SubResource("BoxShape3D_tj76s")
+debug_color = Color(0.9934867, 0, 0.24368817, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_q4kmf")

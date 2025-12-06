@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwaynubedd63d"]
+
+[ext_resource type="PackedScene" uid="uid://f7dnefxflq3v" path="res://models/document_file_folder/scene.gltf" id="1_7nva3"]
+[ext_resource type="Script" uid="uid://cif8ayqkas4u6" path="res://scripts/document_folder.gd" id="1_g5c6v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g5c6v"]
+size = Vector3(2.3394165, 0.27478027, 3.2470016)
+
+[node name="DocumentFolder" type="CharacterBody3D"]
+script = ExtResource("1_g5c6v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033843994, 0.086242676, -0.017780304)
+shape = SubResource("BoxShape3D_g5c6v")
+debug_color = Color(0.9888875, 0, 0.30216813, 0.41960785)
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_7nva3")]

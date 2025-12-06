@@ -1,0 +1,197 @@
+[gd_scene load_steps=10 format=3 uid="uid://cr3a7it7v76k1"]
+
+[ext_resource type="Texture2D" uid="uid://m88r8yhniaud" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_basecolor-4K.png" id="1_8khox"]
+[ext_resource type="Texture2D" uid="uid://cn5lv2kj4uyha" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_ambientocclusion-4K.png" id="2_ch6kk"]
+[ext_resource type="Texture2D" uid="uid://loxbe2ga2xwd" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_height-4K.png" id="3_b0eqs"]
+[ext_resource type="Texture2D" uid="uid://tdydpjaxc6pk" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_metallic-4K.png" id="4_nygqn"]
+[ext_resource type="Texture2D" uid="uid://c11h466s803ub" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_normal-4K.png" id="5_uljk4"]
+[ext_resource type="Texture2D" uid="uid://dt37mjhw2i8th" path="res://textures/bossCeiling/woodceiling_1-4K/woodceiling_1_roughness-4K.png" id="6_quk01"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxee2"]
+albedo_texture = ExtResource("1_8khox")
+metallic = 1.0
+metallic_texture = ExtResource("4_nygqn")
+roughness_texture = ExtResource("6_quk01")
+normal_enabled = true
+normal_texture = ExtResource("5_uljk4")
+ao_enabled = true
+ao_texture = ExtResource("2_ch6kk")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_b0eqs")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_q4kmf"]
+material = SubResource("StandardMaterial3D_gxee2")
+size = Vector2(2, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q8srm"]
+size = Vector3(2, 0.007, 1.5)
+
+[node name="BossRoof" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_q4kmf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0006227493, 0)
+shape = SubResource("BoxShape3D_q8srm")
+debug_color = Color(0.9934867, 0, 0.24368817, 0.41960785)
+
+[node name="Lights" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03529632, 0)
+
+[node name="Column" type="Node3D" parent="Lights"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.16655935, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.837486, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.8316399, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.4996385, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15983574, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights/Column"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5120871, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="Column6" type="Node3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.49002936)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.16655935, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.837486, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.8316399, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.4996385, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15983574, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights/Column6"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5120871, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="Column2" type="Node3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.26523244)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.16655935, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.837486, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.8316399, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.4996385, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15983574, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights/Column2"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5120871, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="Column4" type="Node3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7543196)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.16655935, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.837486, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.8316399, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.4996385, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.15983574, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights/Column4"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.5120871, 0, 0.1310288)
+light_energy = 3.0
+spot_range = 100.0
+spot_angle = 90.0

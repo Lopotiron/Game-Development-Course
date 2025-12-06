@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://bakou7pr72kmi"]
+
+[ext_resource type="Texture2D" uid="uid://cc0i2qjjx7517" path="res://textures/bossfloor/textures/wood_cabinet_worn_long_diff_4k.jpg" id="1_1e0cx"]
+[ext_resource type="Texture2D" uid="uid://coe8jpxd0gcda" path="res://textures/bossfloor/textures/wood_cabinet_worn_long_arm_4k.jpg" id="2_t3bfc"]
+[ext_resource type="Texture2D" uid="uid://b175tuvyjyf52" path="res://textures/bossfloor/textures/wood_cabinet_worn_long_nor_gl_4k.jpg" id="3_6agja"]
+[ext_resource type="Texture2D" uid="uid://cf0vsgwk50jkj" path="res://textures/bossfloor/textures/wood_cabinet_worn_long_disp_4k.jpg" id="4_rdrio"]
+[ext_resource type="Texture2D" uid="uid://bmxxp5d72rmyj" path="res://textures/bossfloor/textures/wood_cabinet_worn_long_rough_4k.jpg" id="5_t3tna"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghwyk"]
+albedo_texture = ExtResource("1_1e0cx")
+metallic = 1.0
+metallic_texture = ExtResource("2_t3bfc")
+roughness_texture = ExtResource("5_t3tna")
+normal_enabled = true
+normal_texture = ExtResource("3_6agja")
+refraction_enabled = true
+refraction_texture = ExtResource("4_rdrio")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_wuwqp"]
+material = SubResource("StandardMaterial3D_ghwyk")
+size = Vector2(2, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e8wqq"]
+size = Vector3(2, 0.007, 1.5)
+
+[node name="BossFloor" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_wuwqp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0006227493, 0)
+shape = SubResource("BoxShape3D_e8wqq")
+debug_color = Color(0.9934867, 0, 0.24368817, 0.41960785)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd6jhbsjoh5px"]
+
+[ext_resource type="PackedScene" uid="uid://cr3a7it7v76k1" path="res://scenes/boss_roof.tscn" id="1_g2a2m"]
+[ext_resource type="PackedScene" uid="uid://bakou7pr72kmi" path="res://scenes/boss_floor.tscn" id="2_ee80j"]
+[ext_resource type="PackedScene" uid="uid://cbc2i7c2lus7q" path="res://scenes/boss_walls2.tscn" id="3_bggbs"]
+[ext_resource type="PackedScene" uid="uid://dmf7fi7lkw2dr" path="res://scenes/boss_walls.tscn" id="4_3ertg"]
+
+[node name="BossRoom" type="Node3D"]
+
+[node name="BossRoof" parent="." instance=ExtResource("1_g2a2m")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 10, 0)
+
+[node name="BossFloor" parent="." instance=ExtResource("2_ee80j")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="BossWalls2" parent="Walls" instance=ExtResource("3_bggbs")]
+transform = Transform3D(-4.371139e-07, 0, -10, 0, 10, 0, 10, 0, -4.371139e-07, 10, 5, 0)
+
+[node name="BossWalls" parent="Walls" instance=ExtResource("4_3ertg")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, -7.5)
+
+[node name="BossWalls4" parent="Walls" instance=ExtResource("4_3ertg")]
+transform = Transform3D(-10, 0, -8.742278e-07, 0, 10, 0, 8.742278e-07, 0, -10, 0, 5, 7.5)
+
+[node name="BossWalls3" parent="Walls" instance=ExtResource("3_bggbs")]
+transform = Transform3D(-4.371139e-07, 0, 10, 0, 10, 0, -10, 0, -4.371139e-07, -10, 5, 0)
