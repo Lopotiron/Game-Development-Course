@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://nc5ihc8r12qv"]
+
+[ext_resource type="Script" uid="uid://rpvtd75mpx00" path="res://scripts/win_screen.gd" id="1_erk2x"]
+[ext_resource type="Texture2D" uid="uid://50wy80qvl8qx" path="res://textures/strasbourg.jpg" id="1_wv5lq"]
+[ext_resource type="AudioStream" uid="uid://bp8r1tfby1k46" path="res://musics/click-menu-button.mp3" id="3_2l6cc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_erk2x"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_2l6cc"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_e41g7"]
+font_size = 30
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_erk2x")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1282.4307
+offset_bottom = 724.1981
+rotation = 0.00010777247
+texture = ExtResource("1_wv5lq")
+expand_mode = 1
+
+[node name="Victory" type="Label" parent="."]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 33.0
+offset_right = 821.0
+offset_bottom = 102.0
+text = "You have Won"
+label_settings = SubResource("LabelSettings_erk2x")
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 117.0
+offset_right = 1210.0
+offset_bottom = 159.0
+text = "You've climbed the ranks of society and become the mayor of Strasbourg"
+label_settings = SubResource("LabelSettings_2l6cc")
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 177.0
+offset_right = 714.0
+offset_bottom = 219.0
+text = "00:00:000"
+label_settings = SubResource("LabelSettings_e41g7")
+
+[node name="ItemList" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 281.0
+offset_right = 743.0
+offset_bottom = 451.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemList"]
+layout_mode = 2
+
+[node name="MainMenu" type="Button" parent="ItemList/VBoxContainer"]
+layout_mode = 2
+text = "Main menu"
+
+[node name="Quit" type="Button" parent="ItemList/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2l6cc")
+volume_db = -10.0
+
+[connection signal="pressed" from="ItemList/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="ItemList/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgf8v5akk862t"]
+[gd_scene load_steps=7 format=3 uid="uid://dgf8v5akk862t"]
 
 [ext_resource type="PackedScene" uid="uid://ceofg0vdbccdj" path="res://models/bullet/scene.gltf" id="1_mkf8s"]
 [ext_resource type="Script" uid="uid://0hld340ra3xb" path="res://scripts/bullet.gd" id="1_y25gk"]
@@ -19,6 +19,9 @@ material = SubResource("StandardMaterial3D_y25gk")
 radius = 0.05
 height = 0.2
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_y25gk"]
+radius = 0.0340196
+
 [node name="Bullet" type="CharacterBody3D" groups=["BulletGroup"]]
 script = ExtResource("1_y25gk")
 
@@ -32,3 +35,10 @@ shape = SubResource("CapsuleShape3D_y25gk")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 0, 0, 0.0014001727)
 mesh = SubResource("CapsuleMesh_l5glv")
+
+[node name="BossHitArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BossHitArea"]
+shape = SubResource("SphereShape3D_y25gk")
+
+[connection signal="body_entered" from="BossHitArea" to="." method="_on_boss_hit_area_body_entered"]

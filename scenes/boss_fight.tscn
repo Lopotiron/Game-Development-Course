@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://crrywfrgqoiv7"]
+[gd_scene load_steps=13 format=3 uid="uid://crrywfrgqoiv7"]
 
 [ext_resource type="PackedScene" uid="uid://cd6jhbsjoh5px" path="res://scenes/boss_room.tscn" id="1_7ydql"]
 [ext_resource type="Script" uid="uid://cdnrv1wrfbw5a" path="res://scripts/boss_fight.gd" id="1_85w88"]
@@ -9,6 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://cxinv8h00jggo" path="res://models/office_chair/scene.gltf" id="3_67f06"]
 [ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/clock.tscn" id="4_2tdpq"]
 [ext_resource type="PackedScene" uid="uid://b1uypert1tm72" path="res://scenes/player-fahad.tscn" id="4_85w88"]
+[ext_resource type="Script" uid="uid://b74le5r6j4vd1" path="res://scripts/boss.gd" id="10_7imqq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_62gkx"]
+size = Vector3(1, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7imqq"]
+size = Vector3(1, 50, 50)
 
 [node name="BossFight" type="Node3D"]
 script = ExtResource("1_85w88")
@@ -45,3 +52,16 @@ transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -
 [node name="PlayerPos" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.200203, 2.5, -1.7321959)
+
+[node name="Boss" type="StaticBody3D" parent="." groups=["boss"]]
+script = ExtResource("10_7imqq")
+
+[node name="BossHitbox" type="CollisionShape3D" parent="Boss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.832054, 0)
+shape = SubResource("BoxShape3D_62gkx")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.735493, 0)
+visible = false
+mesh = SubResource("BoxMesh_7imqq")

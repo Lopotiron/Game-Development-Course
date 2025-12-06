@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var damage = 10
 var speed = 30;
 var destination_position = Vector3(0, 0, 0);
 
@@ -18,5 +19,5 @@ func setDestinationPosition(position):
 
 func _on_hit_player_area_body_entered(body: Node3D) -> void:
 	if (body.is_in_group("player")):
-		get_tree().call_group("player", "hurt", 10)
+		get_tree().call_group("player", "hurt", damage)
 		queue_free()

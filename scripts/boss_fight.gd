@@ -11,6 +11,8 @@ var time = 0.0;
 @onready var deathMenu = $CanvasLayer/DeathMenu
 var player
 
+var boss_life = 1000;
+
 # Called when the node enters the scene tree for the first stime.
 func _ready() -> void:
 	get_player_character()
@@ -20,6 +22,18 @@ func _ready() -> void:
 	hud.player_label.show()
 	player_ins.life_changed.connect(hud.update_life_bar)
 	player_ins.death_signal.connect(deathMenu.death_screen)
+	hud.boss_label.show()
+	hud.boss_name.show()
+
+func hurt(amount):
+	boss_life -= amount
+	if (boss_life <= 0):
+		boss_life = 0
+		GlobalClock.stop()
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+		
+	hud.update_boss_bar(boss_life)
+
 
 func get_player_character():
 	match Global.player_character:

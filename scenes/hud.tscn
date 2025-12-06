@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://72st88be6r2b"]
+[gd_scene load_steps=7 format=3 uid="uid://72st88be6r2b"]
 
 [ext_resource type="Script" uid="uid://b3jspa2xgb05u" path="res://scripts/hud.gd" id="1_ahhtf"]
 
@@ -7,6 +7,15 @@ bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
 bg_color = Color(1.732707e-06, 0.72661847, 0.15506905, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ysmq"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fi6k"]
+bg_color = Color(0, 0.7058824, 0, 1)
+
+[sub_resource type="Theme" id="Theme_uo2fv"]
+default_font_size = 30
 
 [node name="Hud" type="Node" node_paths=PackedStringArray("clock_label")]
 script = ExtResource("1_ahhtf")
@@ -34,3 +43,30 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ahhtf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_oo0fn")
 value = 100.0
 show_percentage = false
+
+[node name="BossBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -350.0
+offset_top = 101.0
+offset_right = 350.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5ysmq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6fi6k")
+max_value = 1000.0
+value = 1000.0
+show_percentage = false
+
+[node name="BossName" type="TextEdit" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.625
+offset_top = 41.0
+offset_right = 125.0
+offset_bottom = 93.0
+grow_horizontal = 2
+theme = SubResource("Theme_uo2fv")
+text = "Strasburg Mayor"
