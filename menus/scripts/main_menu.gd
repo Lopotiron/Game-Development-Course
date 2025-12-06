@@ -9,7 +9,7 @@ func _ready():
 
 func play():
 	button_sound.play()
-	get_tree().change_scene_to_file("res://scenes/debug.tscn")
+	get_tree().change_scene_to_file("res://scenes/character_selector.tscn")
 
 func quit_game():
 	button_sound.play()

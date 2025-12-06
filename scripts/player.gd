@@ -46,7 +46,7 @@ var explosion = preload("res://scenes/explosion.tscn")
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_pistol.hide()
-	
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
