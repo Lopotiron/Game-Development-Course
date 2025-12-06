@@ -6,6 +6,7 @@ extends Control
 func _ready() -> void:
 	time_label.text = GlobalClock.time_to_string()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.warp_mouse(Vector2(0,0))
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
