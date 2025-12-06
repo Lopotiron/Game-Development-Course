@@ -3,7 +3,7 @@ extends Node
 class_name Clock
 
 var time = 0.0
-var stopped = false
+var stopped = true
 
 func _process(delta):
 	if (stopped):

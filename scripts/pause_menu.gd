@@ -70,3 +70,8 @@ func _on_full_screen_toggled(toggled_on: bool) -> void:
 
 func _on_close_pressed() -> void:
 	button_sound.play()
+
+
+func _on_boss_pressed() -> void:
+	resume()
+	get_tree().change_scene_to_file("res://scenes/boss_fight.tscn")

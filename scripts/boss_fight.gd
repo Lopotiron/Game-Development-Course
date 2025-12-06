@@ -1,15 +1,37 @@
 extends Node3D
 
 @export var spawn_object = preload("res://scenes/document_folder.tscn");
-var spawnNumber = 20;
+var spawnNumber = 10;
 var spawnRate = 5;
 var time = 0.0;
-@onready var player = $Player
-@onready var spawnArea1 = $SpawnArea1
+@onready var spawn_area_min: Marker3D = $Marker1
+@onready var spawn_area_max: Marker3D = $Marker2
+@onready var player_pos: Marker3D = $PlayerPos
+@onready var hud = $CanvasLayer/Hud
+@onready var deathMenu = $CanvasLayer/DeathMenu
+var player
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first stime.
 func _ready() -> void:
-	pass
+	get_player_character()
+	var player_ins = player.instantiate()
+	add_child(player_ins)
+	player_ins.position = %PlayerPos.position
+	hud.player_label.show()
+	player_ins.life_changed.connect(hud.update_life_bar)
+	player_ins.death_signal.connect(deathMenu.death_screen)
+
+func get_player_character():
+	match Global.player_character:
+		"fahad":
+			player = load("res://scenes/player-fahad.tscn")
+		"fahad-remastered":
+			player = load("res://scenes/player-fahad-remastered.tscn")
+		"jeanne":
+			player = load("res://scenes/player-jeanne.tscn")
+		_:
+			player = load("res://scenes/player-fahad.tscn")
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,19 +41,16 @@ func _process(delta: float) -> void:
 		time = 0.0
 
 func getRandomPosition() -> Vector3:
-	var mesh_size = spawnArea1.get_aabb().size
-	var global_scale2 = spawnArea1.global_transform.basis.get_scale()
+	randomize()
 	
-	var half_size_x = (mesh_size.x * global_scale2.x) / 2.0
-	var half_size_z = (mesh_size.z * global_scale2.z) / 2.0
+	var x = randf_range(spawn_area_min.global_position.x, spawn_area_max.global_position.x)
+	var z = randf_range(spawn_area_min.global_position.z, spawn_area_max.global_position.z)
+	var y = randf_range(spawn_area_min.global_position.y, spawn_area_max.global_position.y)
 
-	var x = randf_range(-abs(-half_size_x / 2), abs(half_size_x / 2))
-	var z = randf_range(-abs(-half_size_z / 2), abs(half_size_z / 2))
-	var y = spawnArea1.global_position.y + randf_range(1.0, 5.0)
-	return spawnArea1.global_position + Vector3(x, y, z)
+	return Vector3(x, y, z)
 
 func spawn():
-	var destination_position = player.global_position
+	var destination_position = player_pos.global_position
 	for i in range(0, spawnNumber):
 		var obj = spawn_object.instantiate()
 		obj.position = getRandomPosition()

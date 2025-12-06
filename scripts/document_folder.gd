@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var speed = 10;
+var speed = 30;
 var destination_position = Vector3(0, 0, 0);
 
 # Called when the node enters the scene tree for the first time.
@@ -14,3 +14,9 @@ func _process(delta: float) -> void:
 	
 func setDestinationPosition(position):
 	destination_position = position
+
+
+func _on_hit_player_area_body_entered(body: Node3D) -> void:
+	if (body.is_in_group("player")):
+		get_tree().call_group("player", "hurt", 10)
+		queue_free()

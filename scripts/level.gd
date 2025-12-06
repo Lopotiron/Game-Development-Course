@@ -3,6 +3,7 @@ extends Node3D
 var player
 
 func _ready() -> void:
+	GlobalClock.on()
 	get_player_character()
 	var player_ins = player.instantiate()
 	add_child(player_ins)

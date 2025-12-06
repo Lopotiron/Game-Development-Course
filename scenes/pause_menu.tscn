@@ -123,6 +123,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "Quit"
 
+[node name="boss" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Boss"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_1s2dm")
@@ -186,6 +190,7 @@ text = "Close"
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Settings" to="SettingsContainer" method="show"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/boss" to="." method="_on_boss_pressed"]
 [connection signal="value_changed" from="SettingsContainer/PanelContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="item_selected" from="SettingsContainer/PanelContainer/VBoxContainer/HBoxContainer/Resolution" to="." method="_on_resolution_item_selected"]
 [connection signal="toggled" from="SettingsContainer/PanelContainer/VBoxContainer/HBoxContainer/FullScreen" to="." method="_on_full_screen_toggled"]

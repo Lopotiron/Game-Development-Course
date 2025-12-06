@@ -17449,7 +17449,7 @@ _data = {
 &"Walk_Formal": SubResource("Animation_ak01m")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_c61ql")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -17471,7 +17471,7 @@ unique_name_in_owner = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
-root_node = NodePath("%AnimationTree/../fahad")
+root_node = NodePath("%fahad")
 tree_root = SubResource("AnimationNodeBlendTree_qlg0r")
 anim_player = NodePath("../fahad/AnimationPlayer")
 

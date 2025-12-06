@@ -43,9 +43,21 @@ var bullet = load("res://scenes/bullet.tscn")
 var explosion = preload("res://scenes/explosion.tscn")
 @onready var explosion_pos = $fahad/Pistol/ExplosionPos
 
+var life = 100
+signal life_changed(new_life)
+signal death_signal
+
+func hurt(amount):
+	life -= amount
+	if (life <= 0):
+		life = 0
+		emit_signal("death_signal")
+	emit_signal("life_changed", life)
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_pistol.hide()
+	emit_signal("life_changed", 100)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):

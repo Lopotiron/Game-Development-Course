@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dv2blx802fcna" path="res://models/pistol/scene.gltf" id="9_4h77a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
-height = 1.6834717
+height = 1.8236694
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g2els"]
 
@@ -17448,11 +17448,11 @@ _data = {
 &"Walk_Formal": SubResource("Animation_ak01m")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_jgbks")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12921143, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05911255, 0)
 shape = SubResource("CapsuleShape3D_4flbx")
 debug_color = Color(0.99607843, 0, 0, 0.41960785)
 
