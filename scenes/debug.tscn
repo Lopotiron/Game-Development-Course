@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bjhyqe86rj5sn"]
+[gd_scene load_steps=22 format=3 uid="uid://bjhyqe86rj5sn"]
 
 [ext_resource type="PackedScene" uid="uid://72st88be6r2b" path="res://scenes/hud.tscn" id="1_o7ao6"]
 [ext_resource type="Script" uid="uid://bvb047uqdmtl6" path="res://scripts/level.gd" id="1_pleq2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://boogu3nfiuwwl" path="res://scenes/level_1.tscn" id="12_vf3rk"]
 [ext_resource type="AudioStream" uid="uid://dvee28nxlfpjg" path="res://musics/cave_sound.mp3" id="13_oydge"]
 [ext_resource type="PackedScene" uid="uid://cu6onfp7slebf" path="res://scenes/level_2.tscn" id="13_vf3rk"]
+[ext_resource type="PackedScene" uid="uid://8sgcayo14g7n" path="res://scenes/level_3.tscn" id="14_pleq2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txpwr"]
 sky_top_color = Color(0.21127725, 0.35444102, 1, 1)
@@ -80,12 +81,15 @@ shape = SubResource("BoxShape3D_ykrsh")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="tower" parent="." instance=ExtResource("12_05sef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06204796, 0, -0.0066337585)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06943083, 0.031466484, 0.042898178)
 
 [node name="Level 1" parent="." instance=ExtResource("12_vf3rk")]
 
 [node name="Level 2" parent="." instance=ExtResource("13_vf3rk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+
+[node name="Level 3" parent="." instance=ExtResource("14_pleq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 26, 7)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("13_oydge")

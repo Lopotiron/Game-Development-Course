@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg883asvjpxs3"]
+
+[ext_resource type="Script" uid="uid://gn6i6hoy75xq" path="res://scenes/platform_3d.gd" id="1_ym0ae"]
+[ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="2_8xbeu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h27dg"]
+albedo_texture = ExtResource("2_8xbeu")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8xbeu"]
+material = SubResource("StandardMaterial3D_h27dg")
+size = Vector3(4, 0.2, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h27dg"]
+size = Vector3(4, 0.2, 4)
+
+[node name="level_3_platform" type="StaticBody3D"]
+script = ExtResource("1_ym0ae")
+
+[node name="circular_platform" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_8xbeu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_h27dg")
