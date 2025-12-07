@@ -17506,7 +17506,7 @@ libraries = {
 
 [node name="Pistol" parent="fahad" instance=ExtResource("9_4h77a")]
 unique_name_in_owner = true
-transform = Transform3D(0.084149286, 0, 2.8537595, 0, 2.855, 0, -2.8537595, 0, 0.084149286, 0.0136874765, 0.44672686, -0.42583367)
+transform = Transform3D(-1.2479602e-07, 0, -2.855, 0, 2.855, 0, 2.855, 0, -1.2479602e-07, -0.005811307, 1.3193823, 0.46514648)
 
 [node name="Marker3D" type="Marker3D" parent="fahad/Pistol"]
 transform = Transform3D(-4.4703484e-08, 0, -0.9999992, 0, 0.99999964, 0, 0.9999992, 0, -4.4703484e-08, 0.05283399, 0.05572307, -0.00064074993)
