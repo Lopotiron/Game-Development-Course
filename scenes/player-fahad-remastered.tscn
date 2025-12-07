@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://cdiuqqvt16ap"]
+[gd_scene load_steps=90 format=3 uid="uid://cdiuqqvt16ap"]
 
 [ext_resource type="Script" uid="uid://b36rhuq3tdud2" path="res://scripts/player.gd" id="1_c61ql"]
 [ext_resource type="AudioStream" uid="uid://cdwar6uv5wg16" path="res://musics/4.mp3" id="2_lrf2c"]
@@ -17449,6 +17449,8 @@ _data = {
 &"Walk_Formal": SubResource("Animation_ak01m")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_c61ql"]
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_c61ql")
 
@@ -17462,6 +17464,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.99998665, -0.0051836, 0, 0.0051836, 0.99998665, 0, 0, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_g2els")
 spring_length = 3.0
@@ -17514,3 +17517,24 @@ transform = Transform3D(-4.4703484e-08, 0, -0.9999992, 0, 0.99999964, 0, 0.99999
 
 [node name="ExplosionPos" type="Marker3D" parent="fahad/Pistol"]
 transform = Transform3D(0.9999998, 0, -1.8626451e-09, 0, 0.9999999, 0, 1.8626451e-09, 0, 0.9999998, 0.066633314, 0.05552827, -0.0019648299)
+
+[node name="Aim" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Point" type="MeshInstance2D" parent="Aim"]
+position = Vector2(20.5, 20.5)
+scale = Vector2(9, 9)
+mesh = SubResource("SphereMesh_c61ql")
