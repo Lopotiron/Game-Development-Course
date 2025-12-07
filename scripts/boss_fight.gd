@@ -1,20 +1,21 @@
 extends Node3D
-
 @export var spawn_object = preload("res://scenes/document_folder.tscn");
 var spawnNumber = 10;
 var spawnRate = 2;
 var time = 0.0;
+var quote_time = 0.0;
+var quote_interval = 4.0;
+
 @onready var spawn_area_min: Marker3D = $Marker1
 @onready var spawn_area_max: Marker3D = $Marker2
 @onready var player_pos: Marker3D = $PlayerPos
 @onready var hud = $CanvasLayer/Hud
 @onready var deathMenu = $CanvasLayer/DeathMenu
+@onready var _boss := %jeanne
 var player
 var player_instance
-
 var boss_life = 1000;
 
-# Called when the node enters the scene tree for the first stime.
 func _ready() -> void:
 	get_player_character()
 	var player_ins = player.instantiate()
@@ -26,6 +27,7 @@ func _ready() -> void:
 	hud.boss_label.show()
 	hud.boss_name.show()
 	player_instance = player_ins
+	_boss.idle()
 
 func hurt(amount):
 	boss_life -= amount
@@ -35,7 +37,6 @@ func hurt(amount):
 		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 		
 	hud.update_boss_bar(boss_life)
-
 
 func get_player_character():
 	match Global.player_character:
@@ -48,13 +49,19 @@ func get_player_character():
 		_:
 			player = load("res://scenes/player-fahad.tscn")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time += delta
 	if (time >= spawnRate):
 		spawn()
 		time = 0.0
+	
+	quote_time += delta
+	if (quote_time >= quote_interval and not %AudioStreamPlayer3D.playing):
+		play_boss_quote()
+		quote_time = 0.0
+
+func play_boss_quote():
+	_boss.play_quote()
 
 func getRandomPosition() -> Vector3:
 	randomize()
@@ -62,7 +69,6 @@ func getRandomPosition() -> Vector3:
 	var x = randf_range(spawn_area_min.global_position.x, spawn_area_max.global_position.x)
 	var z = randf_range(spawn_area_min.global_position.z, spawn_area_max.global_position.z)
 	var y = randf_range(spawn_area_min.global_position.y, spawn_area_max.global_position.y)
-
 	return Vector3(x, y, z)
 
 func spawn():

@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdch0nutaheis"]
+[gd_scene load_steps=10 format=3 uid="uid://cdch0nutaheis"]
 
 [ext_resource type="Script" uid="uid://b20xlvwggu3ky" path="res://scripts/character_selector.gd" id="1_otyuf"]
 [ext_resource type="PackedScene" uid="uid://derwrlsc3ntwc" path="res://scenes/fahad-selectionable.tscn" id="1_wamhw"]
 [ext_resource type="PackedScene" uid="uid://cgqdm3ucc7fnc" path="res://scenes/fahad_remastered-selectionable.tscn" id="2_otyuf"]
 [ext_resource type="PackedScene" uid="uid://7e3er80j05jg" path="res://scenes/jeanne-selectionable.tscn" id="3_ktnu4"]
+[ext_resource type="PackedScene" uid="uid://bvtk3mrm2uu5j" path="res://models/hokage_office_3d_model.glb" id="5_ktnu4"]
+[ext_resource type="AudioStream" uid="uid://btmr3pjb5go4a" path="res://musics/chara-select.mp3" id="6_dy3sk"]
 
 [sub_resource type="Environment" id="Environment_lrqxi"]
 sdfgi_enabled = true
@@ -38,6 +40,7 @@ transform = Transform3D(0.99939084, 0.014749165, -0.031629685, 0, 0.90630776, 0.
 environment = SubResource("Environment_lrqxi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_so2ut")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -71,5 +74,12 @@ offset_bottom = -75.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Play"
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("5_ktnu4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.425, -1.926)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_dy3sk")
+autoplay = true
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
