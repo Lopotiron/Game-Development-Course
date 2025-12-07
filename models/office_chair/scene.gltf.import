@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cxinv8h00jggo"
-path="res://.godot/imported/scene.gltf-40b9322376a91472c43d20a589d47113.scn"
+valid=false
 
 [deps]
 
 source_file="res://models/office_chair/scene.gltf"
-dest_files=["res://.godot/imported/scene.gltf-40b9322376a91472c43d20a589d47113.scn"]
 
 [params]
 
