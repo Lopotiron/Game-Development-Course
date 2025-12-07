@@ -74,6 +74,7 @@ func _ready() -> void:
 	emit_signal("life_changed", 100)
 	
 	normal_spring_length = _spring_arm.spring_length
+	normal_spring_length = _spring_arm.spring_length
 	normal_spring_position = _spring_arm.position
 	
 	# Désactiver l'interaction de la souris avec le viseur

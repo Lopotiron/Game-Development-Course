@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7qcv7bganhtr"]
+[gd_scene load_steps=7 format=3 uid="uid://b7qcv7bganhtr"]
 
 [ext_resource type="Script" uid="uid://c7n105tw43omo" path="res://menus/scripts/main_menu.gd" id="1_ij7vn"]
 [ext_resource type="Texture2D" uid="uid://dedjtrl317voe" path="res://menus/assets/images/background.jpg" id="2_rqbgu"]
+[ext_resource type="FontFile" uid="uid://oxsgxnws3mmk" path="res://fonts/Rage Company.otf" id="3_oblsv"]
 [ext_resource type="AudioStream" uid="uid://cdvuq8q4l43nc" path="res://menus/assets/music/DavidKBD - Reckless Punk-Metal Pack - 01 - Run Like the Wind.ogg" id="3_yjgyn"]
 [ext_resource type="AudioStream" uid="uid://bp8r1tfby1k46" path="res://musics/click-menu-button.mp3" id="4_rqbgu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rqbgu"]
-font_size = 50
+font = ExtResource("3_oblsv")
+font_size = 120
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -18,6 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_ij7vn")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,44 +31,41 @@ texture = ExtResource("2_rqbgu")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.032
-offset_left = -140.5
-offset_top = 89.0
-offset_right = 140.5
-offset_bottom = 134.95999
-grow_horizontal = 2
-text = "Rage Tower"
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 302.0
+offset_bottom = 355.0
+text = "Rage
+Tower"
 label_settings = SubResource("LabelSettings_rqbgu")
-horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Main" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 100.0
+offset_top = 400.0
+offset_right = 170.0
+offset_bottom = 501.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
-layout_mode = 2
-
-[node name="Play" type="Button" parent="Main/VBoxContainer"]
+[node name="Play" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oblsv")
+theme_override_font_sizes/font_size = 80
 text = "Play"
 
-[node name="Settings" type="Button" parent="Main/VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oblsv")
+theme_override_font_sizes/font_size = 80
 text = "Settings"
 
-[node name="Quit" type="Button" parent="Main/VBoxContainer"]
+[node name="Quit" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_oblsv")
+theme_override_font_sizes/font_size = 80
 text = "Quit"
 
 [node name="SettingsContainer" type="CenterContainer" parent="."]
@@ -127,7 +127,7 @@ autoplay = true
 stream = ExtResource("4_rqbgu")
 volume_db = -10.0
 
-[connection signal="pressed" from="Main/VBoxContainer/Settings" to="SettingsContainer" method="show"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="SettingsContainer" method="show"]
 [connection signal="value_changed" from="SettingsContainer/PanelContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="item_focused" from="SettingsContainer/PanelContainer/VBoxContainer/HBoxContainer/Resolution" to="." method="_on_resolution_item_focused"]
 [connection signal="item_selected" from="SettingsContainer/PanelContainer/VBoxContainer/HBoxContainer/Resolution" to="." method="_on_resolution_item_selected"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dg883asvjpxs3"]
 
-[ext_resource type="Script" uid="uid://gn6i6hoy75xq" path="res://scenes/platform_3d.gd" id="1_ym0ae"]
+[ext_resource type="Script" uid="uid://gn6i6hoy75xq" path="res://scripts/platform_3d.gd" id="1_ym0ae"]
 [ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="2_8xbeu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h27dg"]

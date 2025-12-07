@@ -1,6 +1,12 @@
 extends Control
 
+@onready var play_button = %Play
+@onready var settings_button = %Settings
+@onready var quit_button = %Quit
 @onready var button_sound = $ButtonClick
+@onready var player = %automatic_fahad
+
+@onready var circle_rect: ColorRect = $Blur
 
 func _ready():
 	%Play.pressed.connect(play)
@@ -9,8 +15,23 @@ func _ready():
 
 func play():
 	button_sound.play()
-	get_tree().change_scene_to_file("res://scenes/character_selector.tscn")
+	player._start_move()
+	_blur_and_change_scene()
 
+func _blur_and_change_scene() -> void:
+	var tween := create_tween()
+	
+	circle_rect.material.set("shader_parameter/radius", 1.2)
+	tween.tween_property(
+		circle_rect.material,
+		"shader_parameter/radius",
+		0.0,
+		1.2 
+	)
+
+	await tween.finished
+	get_tree().change_scene_to_file("res://scenes/character_selector.tscn")
+	
 func quit_game():
 	button_sound.play()
 	get_tree().quit()
@@ -38,6 +59,11 @@ func _on_full_screen_toggled(toggled_on: bool) -> void:
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-
 func _on_close_pressed() -> void:
 	button_sound.play()
+
+func on_play_pressed():
+	get_tree().change_scene_to_file("res://scenes/Level1.tscn")
+
+func on_quit_pressed():
+	get_tree().quit()
