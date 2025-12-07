@@ -2,6 +2,12 @@ extends CharacterBody3D
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
+@export var normal_camera_distance := 5.0
+@export var tps_camera_distance := 1.0
+@export var tps_aim_distance := 0.5
+@export var tps_camera_height := 0.8
+@export var tps_camera_side_offset := 0.5
+@export var camera_transition_speed := 10.0
 
 @export_group("Mouvement")
 @export var SPEED = 8.0
@@ -31,10 +37,12 @@ var fall_voice_sounds := [
 @onready var _camera: Camera3D = $%Camera3D
 @onready var _skin = %fahad
 @onready var _camera_pivot: Node3D = %CameraPivot
+@onready var _spring_arm: SpringArm3D = %SpringArm3D
 @onready var _jump_audio = $JumpAudio
 @onready var _fall_audio = $FallAudio
 @onready var _footstep_audio = $FootstepAudio
 @onready var _pistol = $fahad/Pistol
+@onready var _aim = %Aim
 
 var pistol_visible: bool = false
 var pistol_running: bool = false
@@ -42,6 +50,11 @@ var bullet = load("res://scenes/bullet.tscn")
 @onready var bullet_pos = $fahad/Pistol/Marker3D
 var explosion = preload("res://scenes/explosion.tscn")
 @onready var explosion_pos = $fahad/Pistol/ExplosionPos
+
+var is_tps_mode := false
+var is_aiming := false 
+var normal_spring_length := 0.0
+var normal_spring_position := Vector3.ZERO
 
 var life = 100
 signal life_changed(new_life)
@@ -57,26 +70,46 @@ func hurt(amount):
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	_pistol.hide()
+	_aim.hide()
 	emit_signal("life_changed", 100)
+	
+	normal_spring_length = _spring_arm.spring_length
+	normal_spring_position = _spring_arm.position
+	
+	# Désactiver l'interaction de la souris avec le viseur
+	if _aim is Control:
+		_aim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("right_click"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if is_tps_mode:
+			is_aiming = true
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if event.is_action_released("right_click"):
+		is_aiming = false
+		if not is_tps_mode:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 	if event.is_action_pressed("show_mouse"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
 	if Input.is_action_just_pressed("hold_weapon"):
-		if pistol_visible:
-			_pistol.hide()
-			pistol_visible = false
-		else:
+		is_tps_mode = !is_tps_mode
+		pistol_visible = is_tps_mode
+		is_aiming = false
+		
+		if is_tps_mode:
 			_pistol.show()
-			pistol_visible = true
-
+			_aim.show()
+		else:
+			_pistol.hide()
+			_aim.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_camera_input_direction = event.screen_relative * mouse_sensitivity
-
 
 func _physics_process(delta: float) -> void:
 	
@@ -87,6 +120,16 @@ func _physics_process(delta: float) -> void:
 	_camera_pivot.rotation.x = clamp(_camera_pivot.rotation.x, max_down_angle, max_up_angle)
 	_camera_pivot.rotation.y -= _camera_input_direction.x * delta
 	_camera_input_direction = Vector2.ZERO
+
+	if is_tps_mode:
+		var target_length = tps_aim_distance if is_aiming else tps_camera_distance
+		_spring_arm.spring_length = lerp(_spring_arm.spring_length, target_length, camera_transition_speed * delta)
+		
+		var shoulder_offset = Vector3(tps_camera_side_offset, tps_camera_height, 0)
+		_spring_arm.position = _spring_arm.position.lerp(shoulder_offset, camera_transition_speed * delta)
+	else:
+		_spring_arm.spring_length = lerp(_spring_arm.spring_length, normal_spring_length, camera_transition_speed * delta)
+		_spring_arm.position = _spring_arm.position.lerp(normal_spring_position, camera_transition_speed * delta)
 
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var forward := _camera.global_basis.z
@@ -100,7 +143,6 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(direction * SPEED, ACCELERATION * delta)
 	velocity.y = y_velocity + _gravity * delta
 
-	# --- SAUT ---
 	var starting_jump := Input.is_action_just_pressed("jump") and is_on_floor() and not should_stun
 	if starting_jump:
 		velocity.y = JUMP_VELOCITY
@@ -112,11 +154,20 @@ func _physics_process(delta: float) -> void:
 	if not should_stun:
 		move_and_slide()
 
-	if direction.length() > 0.2:
-		_last_mouvement_dir = direction
-	var target_angle = Vector3.BACK.signed_angle_to(_last_mouvement_dir, Vector3.UP)
-	if not should_stun:
-		_skin.global_rotation.y = lerp_angle(_skin.global_rotation.y, target_angle, ROTATION_SPEED * delta)
+	if is_tps_mode:
+		var camera_forward = -_camera.global_basis.z
+		camera_forward.y = 0.0
+		camera_forward = camera_forward.normalized()
+		
+		if camera_forward.length() > 0.1:
+			var target_angle = Vector3.BACK.signed_angle_to(camera_forward, Vector3.UP)
+			_skin.global_rotation.y = lerp_angle(_skin.global_rotation.y, target_angle, ROTATION_SPEED * delta)
+	else:
+		if direction.length() > 0.2:
+			_last_mouvement_dir = direction
+		var target_angle = Vector3.BACK.signed_angle_to(_last_mouvement_dir, Vector3.UP)
+		if not should_stun:
+			_skin.global_rotation.y = lerp_angle(_skin.global_rotation.y, target_angle, ROTATION_SPEED * delta)
 
 	if not is_on_floor() and velocity.y <= 0:
 		if not in_air:
@@ -171,15 +222,21 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			pistol_running = true
 			_pistol.hide()
+			if is_tps_mode:
+				_aim.hide()
 		
 		if ground_speed > 5.0:
 			_skin.sprint()
 			pistol_running = true
 			_pistol.hide()
+			if is_tps_mode:
+				_aim.hide()
 		elif ground_speed > 0.1:
 			_skin.walking()
 			pistol_running = true
 			_pistol.hide()
+			if is_tps_mode:
+				_aim.hide()
 		elif not pistol_visible:
 			_skin.idle()
 			pistol_running = false
@@ -187,3 +244,5 @@ func _physics_process(delta: float) -> void:
 			_skin.hold_weapon()
 			_pistol.show()
 			pistol_running = false
+			if is_tps_mode:
+				_aim.show()
