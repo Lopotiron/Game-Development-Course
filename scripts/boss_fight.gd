@@ -11,23 +11,28 @@ var quote_interval = 4.0;
 @onready var player_pos: Marker3D = $PlayerPos
 @onready var hud = $CanvasLayer/Hud
 @onready var deathMenu = $CanvasLayer/DeathMenu
-@onready var _boss := %jeanne
+
 var player
+var boss
 var player_instance
+var boss_ins
 var boss_life = 1000;
 
 func _ready() -> void:
 	get_player_character()
 	var player_ins = player.instantiate()
+	boss_ins = boss.instantiate()
 	add_child(player_ins)
+	add_child(boss_ins)
 	player_ins.position = %PlayerPos.position
+	boss_ins.position = %BossPos.position
 	hud.player_label.show()
 	player_ins.life_changed.connect(hud.update_life_bar)
 	player_ins.death_signal.connect(deathMenu.death_screen)
 	hud.boss_label.show()
 	hud.boss_name.show()
 	player_instance = player_ins
-	_boss.idle()
+	boss_ins.idle()
 
 func hurt(amount):
 	boss_life -= amount
@@ -42,12 +47,16 @@ func get_player_character():
 	match Global.player_character:
 		"fahad":
 			player = load("res://scenes/player-fahad.tscn")
+			boss = load("res://scenes/jeanne-boss.tscn")
 		"fahad-remastered":
 			player = load("res://scenes/player-fahad-remastered.tscn")
+			boss = load("res://scenes/jeanne-boss.tscn")
 		"jeanne":
 			player = load("res://scenes/player-jeanne.tscn")
+			boss = load("res://scenes/fahad-boss.tscn")
 		_:
 			player = load("res://scenes/player-fahad.tscn")
+			boss = load("res://scenes/jeanne-boss.tscn")
 
 func _process(delta: float) -> void:
 	time += delta
@@ -61,7 +70,7 @@ func _process(delta: float) -> void:
 		quote_time = 0.0
 
 func play_boss_quote():
-	_boss.play_quote()
+	boss_ins.play_quote()
 
 func getRandomPosition() -> Vector3:
 	randomize()

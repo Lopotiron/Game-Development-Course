@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://crrywfrgqoiv7"]
+[gd_scene load_steps=12 format=3 uid="uid://crrywfrgqoiv7"]
 
 [ext_resource type="PackedScene" uid="uid://cd6jhbsjoh5px" path="res://scenes/boss_room.tscn" id="1_7ydql"]
 [ext_resource type="Script" uid="uid://cdnrv1wrfbw5a" path="res://scripts/boss_fight.gd" id="1_85w88"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cysf0c7h3vscm" path="res://scenes/pause_menu.tscn" id="3_2tdpq"]
 [ext_resource type="PackedScene" uid="uid://dvljoryt4jspt" path="res://scenes/death_menu.tscn" id="3_62gkx"]
 [ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/clock.tscn" id="4_2tdpq"]
-[ext_resource type="PackedScene" uid="uid://d3g3pt23th2uv" path="res://scenes/jeanne-boss.tscn" id="9_62gkx"]
 [ext_resource type="AudioStream" uid="uid://h003q6uls8eq" path="res://musics/boss-entrance.mp3" id="10_7hhev"]
 [ext_resource type="Script" uid="uid://b74le5r6j4vd1" path="res://scripts/boss.gd" id="10_7imqq"]
 
@@ -59,11 +58,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.735493, 0)
 visible = false
 mesh = SubResource("BoxMesh_7imqq")
 
-[node name="jeanne" parent="." instance=ExtResource("9_62gkx")]
-unique_name_in_owner = true
-transform = Transform3D(-7.0528324e-07, 0, 16.135, 0, 16.135, 0, -16.135, 0, -7.0528324e-07, -5.962489, 9.00412, 0.06720829)
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("10_7hhev")
 autoplay = true
+
+[node name="BossPos" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 9, 0)
