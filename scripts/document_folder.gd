@@ -12,6 +12,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position = position.move_toward(destination_position, delta * speed)
+	if (position == destination_position):
+		queue_free()
 	
 func setDestinationPosition(position):
 	destination_position = position

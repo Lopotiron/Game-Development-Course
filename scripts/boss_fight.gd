@@ -2,7 +2,7 @@ extends Node3D
 
 @export var spawn_object = preload("res://scenes/document_folder.tscn");
 var spawnNumber = 10;
-var spawnRate = 5;
+var spawnRate = 2;
 var time = 0.0;
 @onready var spawn_area_min: Marker3D = $Marker1
 @onready var spawn_area_max: Marker3D = $Marker2
@@ -10,6 +10,7 @@ var time = 0.0;
 @onready var hud = $CanvasLayer/Hud
 @onready var deathMenu = $CanvasLayer/DeathMenu
 var player
+var player_instance
 
 var boss_life = 1000;
 
@@ -24,6 +25,7 @@ func _ready() -> void:
 	player_ins.death_signal.connect(deathMenu.death_screen)
 	hud.boss_label.show()
 	hud.boss_name.show()
+	player_instance = player_ins
 
 func hurt(amount):
 	boss_life -= amount
@@ -64,7 +66,7 @@ func getRandomPosition() -> Vector3:
 	return Vector3(x, y, z)
 
 func spawn():
-	var destination_position = player_pos.global_position
+	var destination_position = player_instance.position
 	for i in range(0, spawnNumber):
 		var obj = spawn_object.instantiate()
 		obj.position = getRandomPosition()
