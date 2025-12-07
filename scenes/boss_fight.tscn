@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://crrywfrgqoiv7"]
+[gd_scene load_steps=17 format=3 uid="uid://crrywfrgqoiv7"]
 
 [ext_resource type="PackedScene" uid="uid://cd6jhbsjoh5px" path="res://scenes/boss_room.tscn" id="1_7ydql"]
 [ext_resource type="Script" uid="uid://cdnrv1wrfbw5a" path="res://scripts/boss_fight.gd" id="1_85w88"]
@@ -9,12 +9,28 @@
 [ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/clock.tscn" id="4_2tdpq"]
 [ext_resource type="AudioStream" uid="uid://h003q6uls8eq" path="res://musics/boss-entrance.mp3" id="10_7hhev"]
 [ext_resource type="Script" uid="uid://b74le5r6j4vd1" path="res://scripts/boss.gd" id="10_7imqq"]
+[ext_resource type="Script" uid="uid://b854r4yh4jxvr" path="res://models/pistol/floating_effect.gd" id="10_r7oq6"]
+[ext_resource type="PackedScene" uid="uid://dv2blx802fcna" path="res://models/pistol/scene.gltf" id="11_4ix7a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_62gkx"]
 size = Vector3(1, 50, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7imqq"]
 size = Vector3(1, 50, 50)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ql2p3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42ch7"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.8235294, 0.08627451, 0, 0.015686275)
+emission_enabled = true
+emission = Color(0.93333334, 1, 0, 1)
+emission_energy_multiplier = 2.08
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_hllwh"]
+material = SubResource("StandardMaterial3D_42ch7")
 
 [node name="BossFight" type="Node3D"]
 script = ExtResource("1_85w88")
@@ -66,3 +82,51 @@ autoplay = true
 [node name="BossPos" type="Marker3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 9, 0)
+
+[node name="Spinning Glock" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.49728984, 2.4512537, 0.14327158)
+script = ExtResource("10_r7oq6")
+
+[node name="PickUp Area" type="Area3D" parent="Spinning Glock"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spinning Glock/PickUp Area"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_ql2p3")
+debug_color = Color(0.9803366, 0, 0.3844903, 0.41960785)
+
+[node name="Glock2Boss" parent="Spinning Glock" instance=ExtResource("11_4ix7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1593174, 0.018545508, 0.017754348)
+
+[node name="pCube64" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="pCube64_aiStandardSurface1_0" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode/pCube64" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.925132, -4.713762, -11.018328)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode/pCube64/pCube64_aiStandardSurface1_0" index="0"]
+transform = Transform3D(19.999998, 0, 0, 0, 19.999998, 0, 0, 0, 19.999998, -1.7923126, 3.3997254, 9.3109455)
+mesh = SubResource("SphereMesh_hllwh")
+
+[node name="UI" type="CanvasLayer" parent="Spinning Glock"]
+
+[node name="gunHintLabel" type="Label" parent="Spinning Glock/UI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -364.0
+offset_top = -85.0
+offset_right = 369.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 28
+text = "Get the gun! (Press E for TPS mode, Left-click to shoot)"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="Spinning Glock/PickUp Area" to="Spinning Glock" method="_on_pick_up_area_body_entered"]
+
+[editable path="Spinning Glock/Glock2Boss"]

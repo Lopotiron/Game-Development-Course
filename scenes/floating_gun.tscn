@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://ct4oiwr8f2082"]
+
+[ext_resource type="PackedScene" uid="uid://bakou7pr72kmi" path="res://scenes/boss_floor.tscn" id="1_8aihg"]
+[ext_resource type="PackedScene" uid="uid://dv2blx802fcna" path="res://models/pistol/scene.gltf" id="2_7riq2"]
+[ext_resource type="Script" uid="uid://b854r4yh4jxvr" path="res://models/pistol/floating_effect.gd" id="3_7riq2"]
+[ext_resource type="PackedScene" uid="uid://b1uypert1tm72" path="res://scenes/player-fahad.tscn" id="4_42ch7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_42ch7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42ch7"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.8235294, 0.8156863, 0, 0.015686275)
+emission_enabled = true
+emission = Color(0.93333334, 0.85490197, 0, 1)
+emission_energy_multiplier = 2.08
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_k2iul"]
+material = SubResource("StandardMaterial3D_42ch7")
+
+[node name="FloatingGun" type="Node3D"]
+
+[node name="BossFloor" parent="." instance=ExtResource("1_8aihg")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2197128, 0.048746258, -0.087768614)
+
+[node name="Player" parent="." instance=ExtResource("4_42ch7")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.1371274, 0)
+
+[node name="Spinning Glock" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49728984, 0.08145449, 0.14327158)
+script = ExtResource("3_7riq2")
+
+[node name="PickUp Area" type="Area3D" parent="Spinning Glock"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spinning Glock/PickUp Area"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_42ch7")
+debug_color = Color(0.9803366, 0, 0.3844903, 0.41960785)
+
+[node name="Glock2Boss" parent="Spinning Glock" instance=ExtResource("2_7riq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1593174, 0.018545508, 0.017754348)
+
+[node name="pCube64" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="pCube64_aiStandardSurface1_0" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode/pCube64" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.925132, -4.713762, -11.018328)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spinning Glock/Glock2Boss/Sketchfab_model/9ddb3fa428dc40ddaa099bdd39b2dc98_fbx/RootNode/pCube64/pCube64_aiStandardSurface1_0" index="0"]
+transform = Transform3D(19.999998, 0, 0, 0, 19.999998, 0, 0, 0, 19.999998, -1.7923126, 3.3997254, 9.3109455)
+mesh = SubResource("SphereMesh_k2iul")
+
+[connection signal="body_entered" from="Spinning Glock/PickUp Area" to="Spinning Glock" method="_on_pick_up_area_body_entered"]
+
+[editable path="Spinning Glock/Glock2Boss"]

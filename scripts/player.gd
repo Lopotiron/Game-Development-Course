@@ -97,6 +97,8 @@ func _input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if Input.is_action_just_pressed("hold_weapon"):
+		if Global.weapon_active == false:
+			return
 		is_tps_mode = !is_tps_mode
 		pistol_visible = is_tps_mode
 		is_aiming = false

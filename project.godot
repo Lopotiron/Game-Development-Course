@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameDev"
-run/main_scene="uid://c7b8vakgxoby0"
+run/main_scene="uid://b7qcv7bganhtr"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -25,10 +25,6 @@ GlobalClock="*res://scripts/clock.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg")
 
 [filesystem]
 
