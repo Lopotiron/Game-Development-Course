@@ -1,10 +1,14 @@
 extends Node3D
 @onready var anim_player := %AnimationPlayer
-@onready var audio_player := %AudioStreamPlayer3D
+@onready var audio_player: AudioStreamPlayer3D = $"../AudioStreamPlayer3D"
+
 var quote_sounds := []
+var fahad_sound
 
 func _ready():
+	add_to_group("boss")
 	load_quotes_from_folder("res://musics/boss-quote")
+	fahad_sound = preload("res://musics/fahad-x.mp3")
 
 func idle():
 	anim_player.play("AnimPack/Sitting_Idle")
@@ -15,7 +19,11 @@ func dance():
 func play_quote():
 	if quote_sounds.size() > 0:
 		var random_quote = quote_sounds.pick_random()
-		audio_player.stream = random_quote
+		print("AudioPlayer = ", audio_player)
+		print("QuoteSounds = ", quote_sounds)
+		print("Size = ", quote_sounds.size())
+
+		audio_player.stream = fahad_sound if Global.player_character == "jeanne" else random_quote
 		audio_player.play()
 	else:
 		print("Aucun son disponible!")
