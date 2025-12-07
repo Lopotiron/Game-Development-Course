@@ -4,12 +4,12 @@
 [ext_resource type="Shader" uid="uid://cjf0lkthuxjgd" path="res://shaders/pause_menu.gdshader" id="2_vqs20"]
 [ext_resource type="AudioStream" uid="uid://bp8r1tfby1k46" path="res://musics/click-menu-button.mp3" id="3_20fbl"]
 
-[sub_resource type="Theme" id="Theme_vqs20"]
-default_font_size = 100
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5d2l8"]
 shader = ExtResource("2_vqs20")
 shader_parameter/lod = 0.0
+
+[sub_resource type="Theme" id="Theme_vqs20"]
+default_font_size = 100
 
 [sub_resource type="Animation" id="Animation_v4r4p"]
 length = 0.001
@@ -82,6 +82,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ox6ks")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_5d2l8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="YOU ARE DEAD" type="TextEdit" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -94,15 +103,6 @@ offset_bottom = 182.0
 grow_horizontal = 2
 theme = SubResource("Theme_vqs20")
 text = "YOU ARE DEAD"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_5d2l8")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
