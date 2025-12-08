@@ -12,10 +12,10 @@ func _ready() -> void:
 func get_player_character():
 	match Global.player_character:
 		"fahad":
-			player = load("res://scenes/player-fahad.tscn")
+			player = load("res://scenes/Player/player-fahad.tscn")
 		"fahad-remastered":
-			player = load("res://scenes/player-fahad-remastered.tscn")
+			player = load("res://scenes/Player/player-fahad-remastered.tscn")
 		"jeanne":
-			player = load("res://scenes/player-jeanne.tscn")
+			player = load("res://scenes/Player/player-jeanne.tscn")
 		_:
-			player = load("res://scenes/player-fahad.tscn")
+			player = load("res://scenes/Player/player-fahad.tscn")

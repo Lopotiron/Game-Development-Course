@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv1vheo27q1pl"]
-
-[ext_resource type="PackedScene" uid="uid://csmb228ld1lac" path="res://scenes/level_4_button.tscn" id="2_6j14n"]
-
-[node name="Level 4" type="Node3D"]
-
-[node name="Button3D" parent="." instance=ExtResource("2_6j14n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2.5)

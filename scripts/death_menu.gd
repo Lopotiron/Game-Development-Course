@@ -35,4 +35,4 @@ func _on_retry_pressed() -> void:
 	
 	GlobalClock.reset()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/debug.tscn")
+	get_tree().change_scene_to_file("res://scenes/Game/game.tscn")

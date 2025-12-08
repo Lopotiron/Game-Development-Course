@@ -1,0 +1,148 @@
+[gd_scene load_steps=29 format=3 uid="uid://c7b8vakgxoby0"]
+
+[ext_resource type="Script" uid="uid://dxw42b1cijink" path="res://scripts/world.gd" id="1_a8gd2"]
+[ext_resource type="Texture2D" uid="uid://bfgrj0io52fu7" path="res://textures/ground/coast_sand_rocks_02_diff_4k.jpg" id="3_7b55j"]
+[ext_resource type="PackedScene" uid="uid://dm1ersmq4su6l" path="res://scenes/MainMenu/tower_main_menu.tscn" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://b545lt5aukn74" path="res://textures/ground/coast_sand_rocks_02_rough_4k.exr" id="4_5pajh"]
+[ext_resource type="Script" uid="uid://dvm3g7cm2bs46" path="res://addons/proton_scatter/src/scatter.gd" id="5_j7ex8"]
+[ext_resource type="Script" uid="uid://bd1puby6getxx" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="6_a8gd2"]
+[ext_resource type="Script" uid="uid://sqbrsluqmcxf" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="7_hstxw"]
+[ext_resource type="Script" uid="uid://o1gonmbjh8pe" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="8_8egab"]
+[ext_resource type="Script" uid="uid://lyh86484nlf" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="9_gw5y6"]
+[ext_resource type="Script" uid="uid://cttu2c1p7pkl6" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="10_svtp6"]
+[ext_resource type="Script" uid="uid://cwhlainjndwb4" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="11_1dfpl"]
+[ext_resource type="Script" uid="uid://jqcf4v853us2" path="res://addons/proton_scatter/src/scatter_item.gd" id="12_qywvv"]
+[ext_resource type="Script" uid="uid://d4igbhl6dupdm" path="res://addons/proton_scatter/src/scatter_shape.gd" id="13_3wgol"]
+[ext_resource type="Script" uid="uid://blqfhp2jj3wl3" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="14_1acrt"]
+[ext_resource type="Script" uid="uid://k7vjkqjtonk" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="15_vr8o3"]
+[ext_resource type="PackedScene" uid="uid://b7qcv7bganhtr" path="res://scenes/MainMenu/main_menu_buttons.tscn" id="16_5pajh"]
+[ext_resource type="Shader" uid="uid://dlhsnmntwarcp" path="res://shaders/blur.gdshader" id="16_a8gd2"]
+[ext_resource type="PackedScene" uid="uid://crvpsis5k3q7a" path="res://scenes/Player/automatic_fahad.tscn" id="16_j7ex8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a85y"]
+albedo_texture = ExtResource("3_7b55j")
+roughness_texture = ExtResource("4_5pajh")
+roughness_texture_channel = 4
+uv1_triplanar = true
+
+[sub_resource type="Resource" id="Resource_a8gd2"]
+script = ExtResource("8_8egab")
+amount = 1500
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_hstxw"]
+script = ExtResource("9_gw5y6")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(5, 360, 5)
+scale = Vector3(0.1, 0.1, 0.1)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_8egab"]
+script = ExtResource("10_svtp6")
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_gw5y6"]
+script = ExtResource("11_1dfpl")
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+
+[sub_resource type="Resource" id="Resource_1dfpl"]
+script = ExtResource("6_a8gd2")
+stack = Array[ExtResource("7_hstxw")]([SubResource("Resource_a8gd2"), SubResource("Resource_hstxw"), SubResource("Resource_8egab"), SubResource("Resource_gw5y6")])
+
+[sub_resource type="Resource" id="Resource_svtp6"]
+script = ExtResource("15_vr8o3")
+radius = 60.0
+metadata/_custom_type_script = "uid://k7vjkqjtonk"
+
+[sub_resource type="Resource" id="Resource_xyero"]
+script = ExtResource("15_vr8o3")
+radius = 25.0
+metadata/_custom_type_script = "uid://k7vjkqjtonk"
+
+[sub_resource type="Resource" id="Resource_tcusk"]
+script = ExtResource("14_1acrt")
+size = Vector3(50, 1, 10)
+metadata/_custom_type_script = "uid://blqfhp2jj3wl3"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hstxw"]
+shader = ExtResource("16_a8gd2")
+shader_parameter/radius = 1.5
+shader_parameter/center = Vector2(0.5, 0.5)
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_a8gd2")
+
+[node name="tower" parent="." instance=ExtResource("3_bqqt6")]
+
+[node name="floor" type="CSGBox3D" parent="."]
+size = Vector3(110, 0.2, 100)
+material = SubResource("StandardMaterial3D_1a85y")
+
+[node name="ProtonScatter" type="Node3D" parent="."]
+script = ExtResource("5_j7ex8")
+modifier_stack = SubResource("Resource_1dfpl")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://dvm3g7cm2bs46"
+
+[node name="ScatterItem" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("12_qywvv")
+proportion = 70
+path = "uid://b8abs8me7ckgo"
+
+[node name="ScatterItem2" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("12_qywvv")
+proportion = 10
+path = "uid://bltmr2xgs8nq1"
+
+[node name="ScatterItem3" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("12_qywvv")
+proportion = 20
+source_scale_multiplier = 3.0
+path = "uid://caqxfqurbp3ku"
+
+[node name="ScatterShape" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("13_3wgol")
+shape = SubResource("Resource_svtp6")
+
+[node name="ScatterShape2" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("13_3wgol")
+negative = true
+shape = SubResource("Resource_xyero")
+
+[node name="ScatterShape3" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, -25, 0, 0)
+script = ExtResource("13_3wgol")
+negative = true
+shape = SubResource("Resource_tcusk")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.371139e-08, -0.17364818, -0.9848077, 0, 0.9848077, -0.17364818, 1, -7.590403e-09, -4.304731e-08, -50, 1, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.91548723, 0, 0.40234727, 0.1282991, 0.9477962, 0.2919274, -0.38134322, 0.31887662, -0.86769533, 0, 100, -100)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("16_5pajh")]
+
+[node name="Blur" type="ColorRect" parent="CanvasLayer/MainMenu"]
+material = SubResource("ShaderMaterial_hstxw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="automatic_fahad" parent="." instance=ExtResource("16_j7ex8")]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -55, 0, 1)

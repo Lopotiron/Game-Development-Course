@@ -1,5 +1,5 @@
 extends Node3D
-@export var spawn_object = preload("res://scenes/document_folder.tscn");
+@export var spawn_object = preload("res://scenes/BossFight/document_folder.tscn");
 var spawnNumber = 10;
 var spawnRate = 2;
 var time = 0.0;
@@ -39,24 +39,24 @@ func hurt(amount):
 	if (boss_life <= 0):
 		boss_life = 0
 		GlobalClock.stop()
-		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
+		get_tree().change_scene_to_file("res://scenes/BossFight/win_screen.tscn")
 		
 	hud.update_boss_bar(boss_life)
 
 func get_player_character():
 	match Global.player_character:
 		"fahad":
-			player = load("res://scenes/player-fahad.tscn")
-			boss = load("res://scenes/jeanne-boss.tscn")
+			player = load("res://scenes/Player/player-fahad.tscn")
+			boss = load("res://scenes/Player/jeanne-boss.tscn")
 		"fahad-remastered":
-			player = load("res://scenes/player-fahad-remastered.tscn")
-			boss = load("res://scenes/jeanne-boss.tscn")
+			player = load("res://scenes/Player/player-fahad-remastered.tscn")
+			boss = load("res://scenes/Player/jeanne-boss.tscn")
 		"jeanne":
-			player = load("res://scenes/player-jeanne.tscn")
-			boss = load("res://scenes/fahad-boss.tscn")
+			player = load("res://scenes/Player/player-jeanne.tscn")
+			boss = load("res://scenes/Player/fahad-boss.tscn")
 		_:
-			player = load("res://scenes/player-fahad.tscn")
-			boss = load("res://scenes/jeanne-boss.tscn")
+			player = load("res://scenes/Player/player-fahad.tscn")
+			boss = load("res://scenes/Player/jeanne-boss.tscn")
 
 func _process(delta: float) -> void:
 	time += delta

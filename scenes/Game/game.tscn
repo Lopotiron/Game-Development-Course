@@ -1,0 +1,104 @@
+[gd_scene load_steps=23 format=3 uid="uid://bjhyqe86rj5sn"]
+
+[ext_resource type="PackedScene" uid="uid://72st88be6r2b" path="res://scenes/Game/hud.tscn" id="1_o7ao6"]
+[ext_resource type="Script" uid="uid://bvb047uqdmtl6" path="res://scripts/level.gd" id="1_pleq2"]
+[ext_resource type="PackedScene" uid="uid://cysf0c7h3vscm" path="res://scenes/Game/pause_menu.tscn" id="2_05sef"]
+[ext_resource type="PackedScene" uid="uid://bsb7uucw328e7" path="res://scenes/Objects/clock.tscn" id="2_naxnx"]
+[ext_resource type="Texture2D" uid="uid://bxdod8gt2yr0a" path="res://textures/bricks/pavement_04_disp_4k.jpg" id="4_05sef"]
+[ext_resource type="Texture2D" uid="uid://dyv3n85vgr3l3" path="res://textures/slate/Slate_ambientocclusion.png" id="4_vf3rk"]
+[ext_resource type="Texture2D" uid="uid://dtvmiv5vgl6k5" path="res://textures/slate/Slate_height.png" id="5_oydge"]
+[ext_resource type="Texture2D" uid="uid://dnw7hwrwtp0m7" path="res://textures/slate/Slate_metallic.png" id="6_pleq2"]
+[ext_resource type="Texture2D" uid="uid://bawbo12auqhby" path="res://textures/slate/Slate_normal.png" id="7_1xtxu"]
+[ext_resource type="Texture2D" uid="uid://c7xrqxgmfof2t" path="res://textures/slate/Slate_roughness.png" id="8_wg4p5"]
+[ext_resource type="PackedScene" uid="uid://bvqjt31xvibhn" path="res://scenes/Game/tower.tscn" id="12_05sef"]
+[ext_resource type="PackedScene" uid="uid://boogu3nfiuwwl" path="res://scenes/Level1/level_1.tscn" id="12_vf3rk"]
+[ext_resource type="AudioStream" uid="uid://dvee28nxlfpjg" path="res://musics/cave_sound.mp3" id="13_oydge"]
+[ext_resource type="PackedScene" uid="uid://cu6onfp7slebf" path="res://scenes/Level2/level_2.tscn" id="13_vf3rk"]
+[ext_resource type="PackedScene" uid="uid://8sgcayo14g7n" path="res://scenes/Level3/level_3.tscn" id="14_pleq2"]
+[ext_resource type="PackedScene" uid="uid://cv1vheo27q1pl" path="res://scenes/Level4/level_4.tscn" id="16_1xtxu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_txpwr"]
+sky_top_color = Color(0.21127725, 0.35444102, 1, 1)
+sky_horizon_color = Color(0.11396689, 0.75911677, 0.63788205, 1)
+
+[sub_resource type="Sky" id="Sky_16g7q"]
+sky_material = SubResource("ProceduralSkyMaterial_txpwr")
+
+[sub_resource type="Environment" id="Environment_txpwr"]
+background_mode = 2
+sky = SubResource("Sky_16g7q")
+ambient_light_color = Color(1.347661e-06, 0.8653767, 0.9412623, 1)
+ssr_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwtpl"]
+albedo_texture = ExtResource("4_05sef")
+metallic = 1.0
+metallic_texture = ExtResource("6_pleq2")
+roughness_texture = ExtResource("8_wg4p5")
+normal_enabled = true
+normal_texture = ExtResource("7_1xtxu")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("4_vf3rk")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("5_oydge")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lvjdj"]
+material = SubResource("StandardMaterial3D_qwtpl")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ykrsh"]
+size = Vector3(50, 1, 50)
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_pleq2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("1_o7ao6")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_05sef")]
+
+[node name="Clock" parent="." instance=ExtResource("2_naxnx")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_txpwr")
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5054066, 0)
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22351074, 0.76506305, -0.10609436)
+mesh = SubResource("PlaneMesh_lvjdj")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2583058, 0)
+shape = SubResource("BoxShape3D_ykrsh")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="tower" parent="." instance=ExtResource("12_05sef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06943083, 0.031466484, 0.042898178)
+
+[node name="Level 1" parent="." instance=ExtResource("12_vf3rk")]
+
+[node name="Level 2" parent="." instance=ExtResource("13_vf3rk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
+
+[node name="Level 3" parent="." instance=ExtResource("14_pleq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 26, 7)
+
+[node name="Level 4" parent="." instance=ExtResource("16_1xtxu")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.5, 38, 4)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("13_oydge")
+autoplay = true
+
+[node name="PlayerPos" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -10)

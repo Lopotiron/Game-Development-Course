@@ -1,7 +1,7 @@
 extends Node3D
 var current_character_name: String
 @onready var current_character: Node3D
-var selection_area = preload("res://scenes/selection_area.tscn")
+var selection_area = preload("res://scenes/Player/selection_area.tscn")
 var is_swapping = false
 
 func _ready() -> void:
@@ -18,7 +18,7 @@ func _ready() -> void:
 func play():
 	if current_character_name:
 		Global.set_player_character(current_character_name)
-	get_tree().change_scene_to_file("res://scenes/debug.tscn")
+	get_tree().change_scene_to_file("res://scenes/Game/game.tscn")
 	
 func character_selected(character_name):
 	if is_swapping:

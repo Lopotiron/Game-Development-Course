@@ -46,9 +46,9 @@ var fall_voice_sounds := [
 
 var pistol_visible: bool = false
 var pistol_running: bool = false
-var bullet = load("res://scenes/bullet.tscn")
+var bullet = load("res://scenes/Objects/bullet.tscn")
 @onready var bullet_pos = $fahad/Pistol/Marker3D
-var explosion = preload("res://scenes/explosion.tscn")
+var explosion = preload("res://scenes/Objects/explosion.tscn")
 @onready var explosion_pos = $fahad/Pistol/ExplosionPos
 
 var is_tps_mode := false
